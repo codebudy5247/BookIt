@@ -1,11 +1,17 @@
+import { Route, Routes } from "react-router-dom";
+import Layout from "./components/Layout";
+import Home from "./Pages/User/Home";
 
 function App() {
-
   return (
     <>
-     <h1 className="text-3xl font-bold text-center">Hello world!</h1>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+        </Route>
+      </Routes>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
