@@ -68,6 +68,11 @@ const UserLocationDialog = () => {
     setIsOpen(true);
   };
 
+  const onSelectLoc = (name: string) => {
+    localStorage.setItem("location", name);
+    closeModal();
+  };
+
   let userLocation = localStorage.getItem("location");
   return (
     <>
@@ -118,15 +123,31 @@ const UserLocationDialog = () => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                  <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-                    <div className="w-full max-w-md space-y-8">
+                <Dialog.Panel className="w-full transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                  <h2 className="text-center text-3xl font-bold tracking-tight text-gray-900 underline">
+                    Select Your City
+                  </h2>
+
+                  <div className="flex gap-1 mt-6 mb-6">
+                    {data.map((loc: any) => (
                       <div>
-                        <h2 className="mt-2 text-center text-3xl font-bold tracking-tight text-gray-900">
-                          Popular Cities
-                        </h2>
+                        <div
+                          className="cursor-pointer"
+                          onClick={() => onSelectLoc(loc.name)}
+                        >
+                          <img
+                            src={loc.image}
+                            alt={loc.name}
+                            width={200}
+                            height={200}
+                            className="object-contain relative z-10"
+                          />
+                          <h6 className="text-center text-lg hover:text-red">
+                            {loc.name}
+                          </h6>
+                        </div>
                       </div>
-                    </div>
+                    ))}
                   </div>
                 </Dialog.Panel>
               </Transition.Child>
