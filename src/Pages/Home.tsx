@@ -1,6 +1,6 @@
-import HotelListing from "../../components/HotelListing";
-import Container from "../../components/Container";
-import SearchDialog from "../../components/SearchDialog";
+import HotelListing from "../components/HotelListing";
+import Container from "../components/Container";
+import SearchDialog from "../components/SearchDialog";
 const Home = () => {
   return (
     <div>
