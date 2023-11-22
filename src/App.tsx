@@ -13,7 +13,6 @@ function App() {
             <Route path="hotel/:id" element={<HotelDetails />} />
           </Route>
         </Route>
-        {/* <Route path="hotel/:id" element={<HotelDetails />} /> */}
       </Routes>
     </>
   );
