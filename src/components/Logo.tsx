@@ -1,6 +1,6 @@
 const Logo = () => {
   return (
-    <div className="flex flex-shrink-0 items-center">
+    <div className="flex flex-shrink-0 items-center cursor-pointer">
       <h1 className="font-extrabold underline text-5xl text-Blueviolet bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
         BookIt
       </h1>
