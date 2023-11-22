@@ -10,8 +10,7 @@ const SearchDialog = () => {
         rounded-full 
         shadow-sm 
         hover:shadow-md 
-        transition 
-        cursor-pointer
+        transition
         my-5
       "
     >
@@ -61,6 +60,7 @@ const SearchDialog = () => {
               bg-Blueviolet
               rounded-full 
               text-white
+              cursor-pointer
             "
           >
             <Icon icon="material-symbols:search" height={30} width={30} />
