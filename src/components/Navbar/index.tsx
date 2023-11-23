@@ -1,13 +1,11 @@
 import { Disclosure } from "@headlessui/react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import { Icon } from "@iconify/react";
 import Logo from "../Logo";
 import Drawer from "../Drawer";
 import Drawerdata from "./DrawerData";
 import UserLocationDialog from "../UserLocationDialog";
-import Signdialog from "../LoginDialog";
-import Registerdialog from "../RegisterDialog";
 
 // interface NavigationItem {
 //   name: string;
@@ -46,6 +44,7 @@ import Registerdialog from "../RegisterDialog";
 // };
 
 const Navbar = () => {
+  const navigate = useNavigate()
   const [isOpen, setIsOpen] = React.useState(false);
 
   const [currentLink, setCurrentLink] = useState("/");
@@ -90,19 +89,39 @@ const Navbar = () => {
               </div>
             </div>
 
-             <div className="flex gap-4">
-             <UserLocationDialog />
-             <Signdialog />
-             </div>
-           
-            <Registerdialog />
+            <div className="flex gap-3 items-center">
+              <UserLocationDialog />
+              <div className="hidden lg:block">
+                <button
+                  type="button"
+                  className="text-lg text-Blueviolet font-medium"
+                  onClick={() => navigate('/login')}
+                >
+                  Log In
+                </button>
+              </div>
+
+              <div className="hidden lg:block">
+                <button
+                  className="text-Blueviolet text-lg font-medium ml-9 py-5 px-16 transition duration-150 ease-in-out rounded-full bg-semiblueviolet hover:text-white hover:bg-Blueviolet"
+                  onClick={() => navigate('/register')}
+                >
+                  Sign up
+                </button>
+              </div>
+            </div>
 
             {/* DRAWER FOR MOBILE VIEW */}
 
             {/* DRAWER ICON */}
 
             <div className="block lg:hidden">
-              <Icon icon="mdi:hamburger-menu" onClick={() => setIsOpen(true)} width={40} height={40} />
+              <Icon
+                icon="mdi:hamburger-menu"
+                onClick={() => setIsOpen(true)}
+                width={40}
+                height={40}
+              />
             </div>
 
             {/* DRAWER LINKS DATA */}
