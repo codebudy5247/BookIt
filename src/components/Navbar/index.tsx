@@ -1,57 +1,15 @@
 import { Disclosure } from "@headlessui/react";
 import { useNavigate } from "react-router-dom";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Icon } from "@iconify/react";
 import Logo from "../Logo";
 import Drawer from "../Drawer";
 import Drawerdata from "./DrawerData";
 import UserLocationDialog from "../UserLocationDialog";
 
-// interface NavigationItem {
-//   name: string;
-//   href: string;
-//   current: boolean;
-// }
-
-// const navigation: NavigationItem[] = [
-//   { name: "Home", href: "#/", current: true },
-//   { name: "Courses", href: "#courses", current: false },
-//   { name: "Mentor", href: "#mentor", current: false },
-//   { name: "Pricing", href: "/Pricing", current: false },
-//   { name: "Testimonial", href: "#testimonial", current: false },
-// ];
-
-// function classNames(...classes: string[]) {
-//   return classes.filter(Boolean).join(" ");
-// }
-
-// const CustomLink = ({
-//   href,
-//   onClick,
-//   children,
-// }: {
-//   href: string;
-//   onClick: () => void;
-//   children: React.ReactNode;
-// }) => {
-//   return (
-//     <Link to={href}>
-//       <span onClick={onClick} className="px-3 py-4 text-lg font-normal">
-//         {children}
-//       </span>
-//     </Link>
-//   );
-// };
-
 const Navbar = () => {
   const navigate = useNavigate()
-  const [isOpen, setIsOpen] = React.useState(false);
-
-  const [currentLink, setCurrentLink] = useState("/");
-
-  const handleLinkClick = (href: string) => {
-    setCurrentLink(href);
-  };
+  const [isOpen, setIsOpen] = useState<Boolean>(false);
 
   return (
     <Disclosure as="nav" className="navbar">
@@ -66,25 +24,7 @@ const Navbar = () => {
 
               <div className="hidden lg:block m-auto">
                 <div className="flex space-x-4">
-                  {/* {navigation.map((item) => (
-                      <CustomLink
-                        key={item.name}
-                        href={item.href}
-                        onClick={() => handleLinkClick(item.href)}
-                      >
-                        <span
-                          className={classNames(
-                            item.href === currentLink
-                              ? "underline-links"
-                              : "text-slategray",
-                            "px-3 py-4 text-lg font-normal opacity-75 hover:opacity-100"
-                          )}
-                          aria-current={item.href ? "page" : undefined}
-                        >
-                          {item.name}
-                        </span>
-                      </CustomLink>
-                    ))} */}
+                 
                 </div>
               </div>
             </div>
