@@ -43,24 +43,10 @@ const ListingCard = (props: any) => {
           {props?.data?.name},{" "}
           {capitalizeFirstLetter(props?.data?.location?.state)}
         </div>
-        {/* <div className="font-light text-neutral-500">
-          {reservationDate || data.category}
-        </div> */}
         <div className="flex flex-row items-center gap-1">
           <div className="font-semibold">₹ {props?.data?.price}</div>
-          {/* {!reservation && (
-            
-          )} */}
           <div className="font-light">night</div>
         </div>
-        {/* {onAction && actionLabel && (
-          <Button
-            disabled={disabled}
-            small
-            label={actionLabel} 
-            onClick={handleCancel}
-          />
-        )} */}
       </div>
     </div>
   );
