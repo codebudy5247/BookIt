@@ -1,4 +1,4 @@
-import HotelListing from "../components/HotelListing";
+import HotelListing from "../components/Listings/HotelListing";
 import Container from "../components/Container";
 import SearchDialog from "../components/SearchDialog";
 const Home = () => {

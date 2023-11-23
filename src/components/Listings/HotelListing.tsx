@@ -1,14 +1,16 @@
-import { useGetHotelsQuery } from "../redux/api/hotelApi";
-import { Link } from "react-router-dom";
-import Loader from "./Loader";
+import { useGetHotelsQuery } from "../../redux/api/hotelApi";
+import Loader from "../Loader";
+import ListingCard from "./ListingCard";
 
-function capitalizeFirstLetter(str:string) {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-}
 const HotelList = () => {
   const { data, isLoading, isError } = useGetHotelsQuery();
-  console.log({ data, isLoading, isError });
 
+  if (isError)
+    return (
+      <h1 className="font-extrabold text-5xl text-center text-Blueviolet bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+        Something went wrong.Try after sometime!
+      </h1>
+    );
   if (isLoading) return <Loader />;
 
   return (
@@ -16,7 +18,8 @@ const HotelList = () => {
       {data?.length! > 0 &&
         data?.map((hotel) => (
           <div key={hotel._id}>
-            <Link to={`/hotel/${hotel._id}`}>
+            <ListingCard data={hotel} />
+            {/* <Link to={`/hotel/${hotel._id}`}>
               <div className="flex flex-col w-full">
                 {hotel.images?.[0] && (
                   <img
@@ -35,7 +38,7 @@ const HotelList = () => {
                   ₹ {hotel?.price}
                 </p>
               </div>
-            </Link>
+            </Link> */}
           </div>
         ))}
     </div>
@@ -43,4 +46,3 @@ const HotelList = () => {
 };
 
 export default HotelList;
-
