@@ -19,26 +19,6 @@ const HotelList = () => {
         data?.map((hotel) => (
           <div key={hotel._id}>
             <ListingCard data={hotel} />
-            {/* <Link to={`/hotel/${hotel._id}`}>
-              <div className="flex flex-col w-full">
-                {hotel.images?.[0] && (
-                  <img
-                    className="rounded-2xl object-cover aspect-square"
-                    src={hotel.images?.[0]}
-                    alt=""
-                  />
-                )}
-                <h3 className="mt-4 text-lg font-bold text-black">
-                  {hotel.name}
-                </h3>
-                <p className="mt-1 text-md text-gray-500">
-                  {capitalizeFirstLetter(hotel?.location?.city)}
-                </p>
-                <p className="mt-1 font-bold text-sm text-gray-900">
-                  ₹ {hotel?.price}
-                </p>
-              </div>
-            </Link> */}
           </div>
         ))}
     </div>
