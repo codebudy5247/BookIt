@@ -1,4 +1,6 @@
 import { Route, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Layout from "./components/Layout";
 import Home from "./Pages/Home";
 import HotelDetails from "./Pages/HotelDetails";
@@ -7,6 +9,7 @@ import LoginPage from "./Pages/Login";
 function App() {
   return (
     <>
+      <ToastContainer />
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />

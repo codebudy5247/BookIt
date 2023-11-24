@@ -1,35 +1,78 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import { Icon } from "@iconify/react";
 import Container from "../components/Container";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import Heading from "../components/Heading";
 import Input from "../components/Inputs/Input";
+import { useRegisterUserMutation } from "../redux/api/authApi";
+import { RegisterUser } from "../types/user";
+import { toast } from "react-toastify";
+
 
 const Register = () => {
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false);
+
+  // Calling the Register Mutation
+  const [registerUser, { isLoading, isSuccess, error, isError }] =
+    useRegisterUserMutation();
 
   const {
+    reset,
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitSuccessful },
   } = useForm<FieldValues>({
     defaultValues: {
       name: "",
       email: "",
       password: "",
+      confirmpassword: "",
     },
   });
 
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    setIsLoading(true);
-    console.log({ data });
-    setIsLoading(false);
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("User registered successfully");
+      navigate("/login");
+    }
+
+    if (isError) {
+      console.log(error);
+      if (Array.isArray((error as any).data.error)) {
+        (error as any).data.error.forEach((el: any) =>
+          toast.error(el.message, {
+            position: "top-right",
+          })
+        );
+      } else {
+        toast.error((error as any).data.message, {
+          position: "top-right",
+        });
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoading]);
+
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      reset();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSubmitSuccessful]);
+
+  const onSubmit: SubmitHandler<FieldValues> = (values) => {
+    const User: RegisterUser = {
+      name: values.name,
+      email: values.email,
+      password: values.password,
+      passwordConfirm: values.confirmpassword,
+    };
+    registerUser(User);
   };
   return (
     <>
-      <Container className="w-1/3">
+      <Container className="w-1/3 sm:w-2/3">
         <form onSubmit={handleSubmit(onSubmit)} className="form">
           <div className="flex flex-col gap-4">
             <Heading
