@@ -5,8 +5,9 @@ interface IUserState {
   user: IUser | null;
 }
 
+const savedUserData = localStorage.getItem('userData');
 const initialState: IUserState = {
-  user: null,
+  user: savedUserData ? JSON.parse(savedUserData) : null,
 };
 
 export const userSlice = createSlice({

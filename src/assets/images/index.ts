@@ -9,6 +9,8 @@ import Kolk from "./kolk.png"
 import Ncr from "./ncr.png"
 import Pune from "./pune.png"
 
+import AvatarImg from "./placeholder.jpg"
+
 export {
-    Mumbai,Ahd,Bang,Chd,Chen,Hyd,Koch,Kolk,Ncr,Pune
+    Mumbai,Ahd,Bang,Chd,Chen,Hyd,Koch,Kolk,Ncr,Pune,AvatarImg
 }

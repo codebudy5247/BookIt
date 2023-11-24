@@ -21,6 +21,7 @@ export default {
       red: "#B40000",
       gold: "#FFB900",
       darkgray: "rgba(54, 54, 54, 0.75)",
+      neutral100:"rgb(245 245 245)",
       darkbrown: "#352E2E",
       lightgray: "#A3A7AD",
       gunmetalgray: "#363636",
