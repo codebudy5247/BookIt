@@ -4,8 +4,9 @@ const Layout = () => {
   return (
     <>
       <Navbar />
-
-      <Outlet />
+      <section className="py-20">
+        <Outlet />
+      </section>
     </>
   );
 };
