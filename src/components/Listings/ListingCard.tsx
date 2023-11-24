@@ -41,7 +41,7 @@ const ListingCard = (props: any) => {
         </div>
         <div className="font-bold text-lg">
           {props?.data?.name},{" "}
-          {capitalizeFirstLetter(props?.data?.location?.state)}
+          {capitalizeFirstLetter(props?.data?.location?.city)}
         </div>
         <div className="flex flex-row items-center gap-1">
           <div className="font-semibold">₹ {props?.data?.price}</div>
