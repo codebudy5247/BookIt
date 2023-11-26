@@ -98,8 +98,8 @@ const Navbar = () => {
               )}
 
               {logged_in && (
-                <div className="flex gap-3 items-center"> 
-                 <div
+                <div className="flex gap-3 items-center">
+                  <div
                     className="hidden lg:block cursor-pointer"
                     onClick={toggleOpen}
                   >
@@ -123,10 +123,18 @@ const Navbar = () => {
                     >
                       <div className="flex flex-col cursor-pointer">
                         <>
-                          <MenuItem label="Profile" />
+                          <MenuItem
+                            label="Profile"
+                            onClick={() => navigate("/profile")}
+                          />
                           <MenuItem label="My favorites" />
                           <MenuItem label="My reservations" />
-                          {user?.role === "admin" && <MenuItem label="Admin" />}
+                          {user?.role === "admin" && (
+                            <MenuItem
+                              label="Admin"
+                              onClick={() => navigate("/admin")}
+                            />
+                          )}
                           <hr />
                           <MenuItem
                             label="Logout"
