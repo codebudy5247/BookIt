@@ -1,9 +1,10 @@
 import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import RequireUser from "./guard/RequireUSer";
+import RequireUser from "./guard/RequireUser";
 import AdminPage from "./Pages/Admin/Dashboard";
 import Layout from "./components/Layout";
+import LandingPage from "./Pages/LandingPAge";
 import Home from "./Pages/Home";
 import HotelDetails from "./Pages/HotelDetails";
 import RegisterPage from "./Pages/Register";
@@ -15,7 +16,10 @@ function App() {
       <ToastContainer />
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
+          <Route index element={<LandingPage />} />
+          <Route>
+            <Route path="hotels" element={<Home />} />
+          </Route>
           <Route>
             <Route path="hotel/:id" element={<HotelDetails />} />
           </Route>
