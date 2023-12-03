@@ -74,7 +74,7 @@ const Navbar = () => {
             </div>
 
             <div className="flex gap-3 items-center">
-              <UserLocationDialog />
+              {/* <UserLocationDialog /> */}
               {!logged_in && (
                 <>
                   <div className="hidden lg:block">

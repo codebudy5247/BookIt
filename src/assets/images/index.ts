@@ -11,6 +11,10 @@ import Pune from "./pune.png"
 
 import AvatarImg from "./placeholder.jpg"
 
+import Twitter from "./twitter.svg"
+import Facebook from "./facebook.svg"
+import Insta from "./insta.svg"
+
 export {
-    Mumbai,Ahd,Bang,Chd,Chen,Hyd,Koch,Kolk,Ncr,Pune,AvatarImg
+    Mumbai,Ahd,Bang,Chd,Chen,Hyd,Koch,Kolk,Ncr,Pune,AvatarImg,Twitter,Facebook,Insta
 }

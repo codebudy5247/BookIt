@@ -1,11 +1,11 @@
 import HotelListing from "../components/Listings/HotelListing";
 import Container from "../components/Container";
-import SearchDialog from "../components/SearchDialog";
+import Search from "../components/Search";
 const Home = () => {
   return (
     <div>
       <Container>
-        <SearchDialog />
+        <Search />
         <HotelListing />
       </Container>
     </div>

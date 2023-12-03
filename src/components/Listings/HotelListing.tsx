@@ -14,7 +14,7 @@ const HotelList = () => {
   if (isLoading) return <Loader />;
 
   return (
-    <div className="grid gap-x-6 gap-y-8 grid-cols-1 md:grid-cols-4 lg:grid-cols-4">
+    <div className="grid gap-x-6 gap-y-8 grid-cols-1 md:grid-cols-4 lg:grid-cols-4 mt-5">
       {data?.length! > 0 &&
         data?.map((hotel) => (
           <div key={hotel._id}>
