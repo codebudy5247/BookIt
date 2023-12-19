@@ -20,7 +20,16 @@ export const hotelApi = createApi({
       transformResponse: (results: { data: { hotels: HotelResponse[] } }) =>
         results.data.hotels,
     }),
+    getHotel: builder.query<HotelResponse, string>({
+      query(id) {
+        return {
+          url: `/hotel/${id}`,
+          // credentials: 'include',
+        };
+      },
+      providesTags: (result, error, id) => [{ type: 'Hotels', id }],
+    }),
   }),
 });
 
-export const { useGetHotelsQuery } = hotelApi;
+export const { useGetHotelsQuery,useGetHotelQuery } = hotelApi;

@@ -2,9 +2,28 @@ import { useNavigate } from "react-router-dom";
 
 const ListingCard = (props: any) => {
   const navigate = useNavigate();
+
+  // navigate(PATH_SIGNUP.emailVerification, {
+  //   state: {
+  //     FirstName: firstName,
+  //     LastName: lastName,
+  //     Email: data?.email!,
+  //     CompanyRelation: companyRelation,
+  //     Phone: userPhone,
+  //   },
+  // });
+
+  const onClickHandler = () => {
+    navigate(`/hotel/${props?.data._id}`, {
+      state: {
+        hotel: props?.data
+      },
+    });
+  }
   return (
     <div
-      onClick={() => navigate(`/hotel/${props?.data._id}`)}
+      // onClick={() => navigate(`/hotel/${props?.data._id}`)}
+      onClick={onClickHandler}
       className="col-span-1 cursor-pointer group"
     >
       <div className="flex flex-col gap-2 w-full">

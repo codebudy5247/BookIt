@@ -11,6 +11,8 @@ const initialDateRange = {
   
 const DatePicker = () => {
     const [dateRange, setDateRange] = useState<Range>(initialDateRange);
+    console.log(dateRange,"dateRange");
+    
   return (
     <div>
         <DateRange

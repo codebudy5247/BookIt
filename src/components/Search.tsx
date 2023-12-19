@@ -9,9 +9,6 @@ const options = [
 
 const Search = () => {
   const [selectedOption, setSelectedOption] = useState(null);
-  const [selectedCity, setSelectedCity] = useState(null);
-
-  console.log({ selectedOption, selectedCity });
 
   return (
     <>
@@ -36,7 +33,7 @@ const Search = () => {
                 </svg>
                 <input
                   id="search"
-                  placeholder=""
+                  placeholder="Search by city..."
                   type="text"
                   className={`
                       peer
@@ -95,7 +92,7 @@ const Search = () => {
             />
           </div>
           {/* Select City */}
-          <div className="w-full md:1/3 lg:w-auto mb-4 md:mb-0">
+          {/* <div className="w-full md:1/3 lg:w-auto mb-4 md:mb-0">
             <Select
               placeholder="Select City"
               isClearable
@@ -105,7 +102,7 @@ const Search = () => {
               formatOptionLabel={(option: any) => (
                 <div
                   className="
-          flex flex-row items-center gap-3 w-20"
+          flex flex-row items-center gap-3"
                 >
                   <div>
                     {option.name},
@@ -130,63 +127,6 @@ const Search = () => {
                 },
               })}
             />
-          </div>
-
-          {/* <div className="flex mb-3">
-            <div className="w-1/2 pr-2 mb-1">
-              <label
-                htmlFor="check-in-date"
-                className="block text-sm font-medium text-gray-900 dark:text-gray-400"
-              >
-                Check In date
-              </label>
-              <input
-                id="search"
-                placeholder=""
-                type="date"
-                className={`
-                      peer
-                      w-full
-                      p-4
-                      pt-4
-                     
-                      font-light 
-                      bg-white 
-                      rounded-md
-                      outline-none
-                      transition
-                      disabled:opacity-70
-                      disabled:cursor-not-allowed
-                    `}
-              />
-            </div>
-            <div className="w-1/2 pl-2">
-              <label
-                htmlFor="check-out-date"
-                className="block text-sm font-medium text-gray-900 dark:text-gray-400 mb-1"
-              >
-                Check Out date
-              </label>
-              <input
-                id="search"
-                placeholder=""
-                type="date"
-                className={`
-                      peer
-                      w-full
-                      p-4
-                      pt-4
-                      pl-10
-                      font-light 
-                      bg-white 
-                      rounded-md
-                      outline-none
-                      transition
-                      disabled:opacity-70
-                      disabled:cursor-not-allowed
-                    `}
-              />
-            </div>
           </div> */}
 
           <button
