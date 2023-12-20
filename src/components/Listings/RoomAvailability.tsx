@@ -1,19 +1,9 @@
-import { useState } from "react";
 import { useGetHotelRoomsQuery } from "../../redux/api/hotelApi";
 import Loader from "../Loader";
-import Select from "react-select";
-
-const options = [
-  { value: "1", label: "1" },
-  { value: "2", label: "2" },
-  { value: "3", label: "3" },
-  { value: "4", label: "4" },
-  { value: "5", label: "5" },
-];
 
 const RoomAvailability = (props: any) => {
   const { data, isError, isLoading } = useGetHotelRoomsQuery(props?.hotelID);
-  const [selectedOption, setSelectedOption] = useState(null);
+  
 
   if (isError)
     return (
@@ -25,7 +15,7 @@ const RoomAvailability = (props: any) => {
   return (
     <>
       <h2 className="font-bold text-3xl mb-4">Availability</h2>
-      <div className="overflow-x-auto">
+      <div className="">
         <table className="w-full border-1 border-lightgray">
           <thead className="bg-semiblueviolet">
             <tr>
@@ -39,7 +29,7 @@ const RoomAvailability = (props: any) => {
                 Price
               </th>
               <th className="px-6 py-3 border-b-2 border-lightgray text-left text-xs font-semibold text-gray500 uppercase tracking-wider">
-                Select Amount
+                Select Room
               </th>
             </tr>
           </thead>
@@ -58,42 +48,30 @@ const RoomAvailability = (props: any) => {
                       ₹ {room?.price}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap border border-lightgray">
-                      <div className="md:1/3 lg:w-auto mb-4 md:mb-0">
-                        <Select
-                          placeholder="Select Amount"
-                          isClearable
-                          options={options}
-                          defaultValue={selectedOption}
-                          onChange={setSelectedOption}
-                          formatOptionLabel={(option: any) => (
-                            <div
-                              className="
-          flex flex-row items-center gap-3"
-                            > 
-                              <div>
-                                {option.label}
-                                {/* <span className="text-neutral-500 ml-1">
-                                  {option.region}
-                                </span> */}
-                              </div>
-                            </div>
-                          )}
-                          classNames={{
-                            control: () => "p-2 border-2",
-                            input: () => "text-lg",
-                            option: () => "text-lg",
-                          }}
-                          theme={(theme) => ({
-                            ...theme,
-                            borderRadius: 6,
-                            colors: {
-                              ...theme.colors,
-                              primary: "black",
-                              primary25: "rgba(101, 86, 255, 0.15)",
-                            },
-                          })}
-                        />
-                      </div>
+                      {room?.roomNumbers.map((data: any) => (
+                        <div className="">
+                          {data?.roomNumber}
+                          <input
+                            id="selectroom"
+                            type="checkbox"
+                            className={`
+                      peer
+                      w-full
+                      p-4
+                      pt-4
+                      pl-5
+                      font-light 
+                      bg-white 
+                      rounded-md
+                      outline-none
+                      transition
+                      disabled:opacity-70
+                      disabled:cursor-not-allowed
+                      mb-3
+                    `}
+                          />
+                        </div>
+                      ))}
                     </td>
                   </tr>
                 </>

@@ -44,7 +44,7 @@ const HotelDetails = () => {
                 <h2 className="font-bold text-3xl mb-2">Safety And Hygiene</h2>
                 <div className="grid grid-cols-2">
                   <div className="flex items-center my-1 md:my-0">
-                    <MdOutlineCleaningServices height={40} width={40} />
+                    <MdOutlineCleaningServices />
                     <p className="ml-2 md:text-base text-xs">Daily Cleaning</p>
                   </div>
                   <div className="flex items-center my-1 md:my-0">
