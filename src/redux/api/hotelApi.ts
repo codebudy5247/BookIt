@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { HotelResponse } from "../../types/hotel";
+import { HotelResponse,HotelRoomResponse } from "../../types/hotel";
 
 const BASE_URL = "http://localhost:1337";
 
@@ -24,12 +24,19 @@ export const hotelApi = createApi({
       query(id) {
         return {
           url: `/hotel/${id}`,
-          // credentials: 'include',
         };
       },
-      providesTags: (result, error, id) => [{ type: 'Hotels', id }],
+      // providesTags: (result, error, id) => [{ type: 'Hotels', id }],
+    }),
+    getHotelRooms: builder.query<HotelRoomResponse[], string>({
+      query(id) {
+        return {
+          url: `/hotel/rooms/${id}`,
+        };
+      },
+      // providesTags: (result, error, id) => [{ type: 'Hotels', id }],
     }),
   }),
 });
 
-export const { useGetHotelsQuery,useGetHotelQuery } = hotelApi;
+export const { useGetHotelsQuery,useGetHotelQuery,useGetHotelRoomsQuery } = hotelApi;

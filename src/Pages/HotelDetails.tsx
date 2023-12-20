@@ -7,6 +7,7 @@ import { AiOutlineMedicineBox } from "react-icons/ai";
 import { GiSmokeBomb } from "react-icons/gi";
 import Gallery from "../components/Listings/Gallery";
 import Booking from "../components/Booking";
+import RoomAvailability from "../components/Listings/RoomAvailability";
 interface CustomState {
   hotel: HotelResponse;
 }
@@ -18,34 +19,13 @@ const HotelDetails = () => {
   return (
     <div>
       <Container>
+        <h2 className="font-bold text-lg md:text-2xl mb-2">
+          {state?.hotel?.name}
+        </h2>
         <Gallery photos={state?.hotel?.images} />
         <div className="md:grid md:grid-cols-12 gap-10 mt-4">
           <div className="md:col-span-8 md:w-full">
             <div>
-              <div className="flex gap-1 items-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"
-                />
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
-                />
-              </svg>
-              <h2 className="font-bold text-lg md:text-2xl">
-                {state?.hotel?.name}
-              </h2>
-              </div>
               {/* <div className="flex my-11">
                 {state?.hotel?.amenities.map((amenity) => (
                   <div
@@ -95,12 +75,13 @@ const HotelDetails = () => {
               </div> */}
             </div>
           </div>
-         
-          <div className='md:col-span-4 rounded-xl shadow-lg sticky top-10 h-fit overflow-auto'>
-            <Booking />
-          </div>
-        </div>
 
+          {/* <div className="md:col-span-4 rounded-xl shadow-lg sticky top-10 h-fit overflow-auto">
+            <Booking />
+          </div> */}
+        </div>
+        {/* List of rooms */}
+        <RoomAvailability hotelID={state?.hotel?._id} />
       </Container>
     </div>
   );

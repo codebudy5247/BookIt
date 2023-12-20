@@ -23,7 +23,7 @@ const Booking = (props: any) => {
                       mb-3
                     `}
       />
-      <DatePicker />
+      {/* <DatePicker /> */}
       <button className="text-Blueviolet text-lg font-medium ml-9 py-3 px-16 transition duration-150 ease-in-out rounded-full bg-semiblueviolet hover:text-white hover:bg-Blueviolet mt-3">
         Book this place
       </button>
