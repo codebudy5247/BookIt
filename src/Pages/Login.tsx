@@ -17,7 +17,10 @@ const Login = () => {
   const [loginUser, { isLoading, isError, error, isSuccess }] =
     useLoginUserMutation();
 
-  const from = ((location.state as any)?.from.pathname as string) || "/";
+  const from = ((location.state as any)?.from.pathname as string) || "/hotels";
+
+  console.log(from,"from.....");
+  
 
   const {
     reset,
