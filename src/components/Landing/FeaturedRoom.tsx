@@ -19,7 +19,7 @@ const FeaturedRoom = () => {
   return (
     <section className="flex md:flex-row flex-col py-10 items-center gap-12 container mx-auto">
       <div className="md:grid gap-8 grid-cols-1">
-        {/* <div className='w-full rounded-2xl overflow-hidden h-48 mb-4 md:mb-0'>
+        <div className='w-full rounded-2xl overflow-hidden h-48 mb-4 md:mb-0'>
           <img
             src="https://images.oyoroomscdn.com/uploads/hotel_image/18616/large/b50ae3f1cf28e829.jpg"
             alt={getSingleFeaturedRoom?.name}
@@ -27,7 +27,7 @@ const FeaturedRoom = () => {
             height={300}
             className='img scale-animation'
           />
-        </div> */}
+        </div>
         <div className="grid grid-cols-2 gap-8 h-55">
           {getSingleFeaturedRoom &&
             getSingleFeaturedRoom.images.map((image:any) => (

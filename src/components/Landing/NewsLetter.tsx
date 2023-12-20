@@ -1,6 +1,7 @@
+import sendImg from "../../assets/images/send.svg";
 const NewsLetter = () => {
   return (
-    <div className="mx-auto max-w-2xl md:max-w-7xl sm:rounded-3xl">
+    <div className="mx-auto max-w-2xl md:max-w-7xl sm:rounded-3xl testimonialbg mt-10">
       <div className="grid grid-cols-1 gap-y-10 gap-x-6 md:grid-cols-12 xl:gap-x-8">
         <div className="col-span-12 bg-imagee">
           <div className="mb-10 mt-24 lg:mx-64 lg:my-24">
@@ -8,8 +9,7 @@ const NewsLetter = () => {
               Newsletter.
             </h3>
             <h3 className="text-base font-normal opacity-75 text-white text-center mb-8">
-              Subscrible our newsletter for discounts, <br /> promo and many
-              more.
+              Subscrible our newsletter for discounts,promo and many more.
             </h3>
 
             <div>
@@ -22,19 +22,16 @@ const NewsLetter = () => {
                   autoComplete="off"
                 />
                 <div className="absolute inset-y-0 right-0 flex items-center pr-6 pt-5 lg:pt-0">
-                  <button
-                    type="submit"
-                    className="p-3 lg:p-5 focus:outline-none focus:shadow-outline bg-ultramarine hover:bg-midnightblue duration-150 ease-in-out rounded-full"
-                  >
-                    <img
-                      src={"/assets/images/send.svg"}
-                      alt="send-icon"
-                      width={30}
-                      height={30}
-                    />
-                  </button>
-                </div>
+                <button
+                  type="submit"
+                  className="p-3 lg:p-5 focus:outline-none focus:shadow-outline bg-dark-red hover:bg-red duration-150 ease-in-out rounded-full"
+                >
+                  <img src={sendImg} alt="send-icon" width={30} height={30} />
+                </button>
               </div>
+              </div>
+
+              
             </div>
           </div>
         </div>
