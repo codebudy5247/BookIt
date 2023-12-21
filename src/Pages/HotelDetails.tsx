@@ -1,13 +1,10 @@
 import Container from "../components/Container";
 import { useLocation } from "react-router-dom";
 import { HotelResponse } from "../types/hotel";
-import { MdOutlineCleaningServices } from "react-icons/md";
-import { LiaFireExtinguisherSolid } from "react-icons/lia";
-import { AiOutlineMedicineBox } from "react-icons/ai";
-import { GiSmokeBomb } from "react-icons/gi";
 import Gallery from "../components/Listings/Gallery";
-import Booking from "../components/Booking";
 import RoomAvailability from "../components/Listings/RoomAvailability";
+import { Icon } from "@iconify/react";
+
 interface CustomState {
   hotel: HotelResponse;
 }
@@ -26,16 +23,22 @@ const HotelDetails = () => {
         <div className="md:grid md:grid-cols-12 gap-10 mt-4">
           <div className="md:col-span-8 md:w-full">
             <div>
-              {/* <div className="flex my-11">
+              <h2 className="font-bold text-3xl mb-2">Amenities</h2>
+              <div className="flex items-center gap-3">
                 {state?.hotel?.amenities.map((amenity) => (
-                  <div
-                    key={amenity}
-                    className="md:w-44 w-fit text-center px-2 md:px-0 h-20 md:h-40 mr-3 bg-[#eff0f2] dark:bg-gray-800 rounded-lg grid place-content-center"
-                  >
-                    <p className="text-xs md:text-base pt-3">{amenity}</p>
+                  <div key={amenity} className="flex">
+                    <Icon
+                      icon="typcn:tick"
+                      color="lightgreen"
+                      height={40}
+                      width={40}
+                    />
+                    <p className="text-xs md:text-base pt-3">
+                      {capitalizeFirstLetter(amenity)}
+                    </p>
                   </div>
                 ))}
-              </div> */}
+              </div>
               <div className="mb-8 mt-4">
                 <h2 className="font-bold text-3xl mb-2">Description</h2>
                 <p>{state?.hotel?.description}</p>
@@ -43,25 +46,33 @@ const HotelDetails = () => {
               <div className="mb-11">
                 <h2 className="font-bold text-3xl mb-2">Safety And Hygiene</h2>
                 <div className="grid grid-cols-2">
-                  <div className="flex items-center my-1 md:my-0">
-                    <MdOutlineCleaningServices />
-                    <p className="ml-2 md:text-base text-xs">Daily Cleaning</p>
+                  <div className="flex items-center my-2 md:my-0">
+                    <Icon icon="healthicons:cleaning" height={30} width={30} />
+                    <p className="ml-2 md:text-base text-sm">Daily Cleaning</p>
                   </div>
-                  <div className="flex items-center my-1 md:my-0">
-                    <LiaFireExtinguisherSolid />
-                    <p className="ml-2 md:text-base text-xs">
+                  <div className="flex items-center my-2 md:my-0">
+                    <Icon
+                      icon="ic:outline-fire-extinguisher"
+                      height={30}
+                      width={30}
+                    />
+                    <p className="ml-2 md:text-base text-sm">
                       Fire Extinguishers
                     </p>
                   </div>
-                  <div className="flex items-center my-1 md:my-0">
-                    <AiOutlineMedicineBox />
-                    <p className="ml-2 md:text-base text-xs">
+                  <div className="flex items-center my-2 md:my-0">
+                    <Icon
+                      icon="ant-design:medicine-box-filled"
+                      height={30}
+                      width={30}
+                    />
+                    <p className="ml-2 md:text-base text-sm">
                       Disinfections and Sterilizations
                     </p>
                   </div>
-                  <div className="flex items-center my-1 md:my-0">
-                    <GiSmokeBomb />
-                    <p className="ml-2 md:text-base text-xs">Smoke Detectors</p>
+                  <div className="flex items-center my-2 md:my-0">
+                    <Icon icon="game-icons:smoke-bomb" height={30} width={30} />
+                    <p className="ml-2 md:text-base text-sm">Smoke Detectors</p>
                   </div>
                 </div>
               </div>
@@ -75,9 +86,8 @@ const HotelDetails = () => {
               </div> */}
             </div>
           </div>
-
           {/* <div className="md:col-span-4 rounded-xl shadow-lg sticky top-10 h-fit overflow-auto">
-            <Booking />
+          
           </div> */}
         </div>
         {/* List of rooms */}
@@ -88,3 +98,7 @@ const HotelDetails = () => {
 };
 
 export default HotelDetails;
+
+function capitalizeFirstLetter(str: string) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}

@@ -1,9 +1,21 @@
 import { useGetHotelRoomsQuery } from "../../redux/api/hotelApi";
 import Loader from "../Loader";
+import { Icon } from "@iconify/react";
 
 const RoomAvailability = (props: any) => {
   const { data, isError, isLoading } = useGetHotelRoomsQuery(props?.hotelID);
   
+  const renderIcons = (num: any) => {
+    const icons = [];
+    for (let i = 0; i < num; i++) {
+      icons.push(
+        <span key={i}>
+          <Icon icon="ic:baseline-person" height={30} width={30} />
+        </span>
+      );
+    }
+    return icons;
+  };
 
   if (isError)
     return (
@@ -42,7 +54,7 @@ const RoomAvailability = (props: any) => {
                       {capitalizeFirstLetter(room?.roomType)}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap border border-lightgray">
-                      {room?.maxPeople}
+                      <div className="flex">{renderIcons(room?.maxPeople)}</div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap border border-lightgray">
                       ₹ {room?.price}
