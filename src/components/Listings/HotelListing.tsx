@@ -7,7 +7,7 @@ const HotelList = () => {
 
   if (isError)
     return (
-      <h1 className="font-extrabold text-5xl text-center text-Blueviolet bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+      <h1 className="mt-10 font-bold text-5xl text-center text-Blueviolet bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
         Something went wrong.Try after sometime!
       </h1>
     );
