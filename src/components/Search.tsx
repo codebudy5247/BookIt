@@ -119,28 +119,14 @@ const Search = () => {
             )}`}</span>
 
             {openDate && (
-              <div
-                className="
-              absolute 
-              rounded-xl 
-              shadow-md
-              w-auto
-              bg-white 
-              overflow-hidden 
-              right-15
-              text-sm
-              top-5
-              mt-[170px]
-            "
-              >
-                <DateRange
-                  editableDateInputs={true}
-                  onChange={(item: any) => setDates([item.selection])}
-                  moveRangeOnFirstSelection={false}
-                  ranges={dates}
-                  minDate={new Date()}
-                />
-              </div>
+              <DateRange
+                editableDateInputs={true}
+                onChange={(item: any) => setDates([item.selection])}
+                moveRangeOnFirstSelection={false}
+                ranges={dates}
+                minDate={new Date()}
+                className="absolute top-[180px] z-20"
+              />
             )}
           </div>
 
