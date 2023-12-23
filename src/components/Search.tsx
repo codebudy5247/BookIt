@@ -1,21 +1,31 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { Icon } from "@iconify/react";
 import { DateRange } from "react-date-range";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { format } from "date-fns";
-
+import { useAppDispatch } from "../redux/hook";
+import { SearchData } from "../redux/features/searchSlice";
 const Search = () => {
-  const [dates, setDates] = useState([
+  const dispatch = useAppDispatch();
+  const [dates, setDates] = useState<any>([
     {
-      startDate: new Date(), // Initial start date
-      endDate: new Date(), // Initial end date
+      startDate: new Date(),
+      endDate: new Date(),
       key: "selection",
     },
   ]);
   const [openDate, setOpenDate] = useState(false);
+  const [destination,setDestination] = useState();
 
-  console.log(dates);
+  useEffect(() => {
+    dispatch(SearchData({
+      destination,
+      checkInDate: dates[0].startDate,
+      checkOutDate: dates[0].endDate,
+    }))
+  }, [dates,destination])
+  
 
   return (
     <>
@@ -41,6 +51,7 @@ const Search = () => {
                 </svg>
                 <input
                   id="search"
+                  onChange={(e:any) => setDestination(e.target.value)}
                   placeholder="Destination"
                   type="text"
                   className={`
@@ -83,7 +94,7 @@ const Search = () => {
               )}
             </div>
           </div>
-          <div
+          {/* <div
             className="
               p-2 
               bg-Blueviolet
@@ -93,7 +104,7 @@ const Search = () => {
             "
           >
             <Icon icon="material-symbols:search" height={30} width={30} />
-          </div>
+          </div> */}
         </div>
       </section>
     </>
