@@ -9,11 +9,10 @@ interface propTypes {
   isError: boolean;
 }
 
-const filterData = (query: any, data: HotelResponse[]) => {
+const filterData = (query: string, data: HotelResponse[]) => {
   if (!query) {
     return data;
   } else {
-    console.log(query);
     let filteredData = data.filter(
       (d: any) =>
         d?.location?.state?.toLowerCase().includes(query) ||
