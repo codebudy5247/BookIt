@@ -30,8 +30,7 @@ const Search = () => {
   return (
     <>
       <section className="bg-white shadow-xl px-4 py-3 rounded-lg mt-5">
-        <div className="container mx-auto flex gap-2 flex-wrap justify-between items-center">
-          <div className="flex items-center">
+        <div className="container mx-auto flex gap-20 items-center">
             {/* Search Bar */}
             <div className="w-full md:1/3 lg:w-auto mb-4 md:mb-0">
               <div className="w-full relative">
@@ -93,7 +92,7 @@ const Search = () => {
                 />
               )}
             </div>
-          </div>
+         
           {/* <div
             className="
               p-2 
