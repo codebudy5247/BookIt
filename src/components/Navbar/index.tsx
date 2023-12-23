@@ -5,11 +5,10 @@ import { Icon } from "@iconify/react";
 import Logo from "../Logo";
 import Drawer from "../Drawer";
 import Drawerdata from "./DrawerData";
-import UserLocationDialog from "../UserLocationDialog";
 import Avatar from "../Avatar";
 import MenuItem from "../MenuItem";
 import { useCookies } from "react-cookie";
-import { useAppSelector } from "../../redux/store";
+import { useAppSelector } from "../../redux/hook";
 import { useLogoutUserMutation } from "../../redux/api/authApi";
 import { toast } from "react-toastify";
 
