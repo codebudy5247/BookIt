@@ -10,6 +10,7 @@ import HotelDetails from "./Pages/HotelDetails";
 import RegisterPage from "./Pages/Register";
 import LoginPage from "./Pages/Login";
 import UserProfile from "./Pages/USerProfile";
+import Booking from "./Pages/Booking";
 function App() {
   return (
     <>
@@ -22,6 +23,9 @@ function App() {
           </Route>
           <Route>
             <Route path="hotel/:id" element={<HotelDetails />} />
+          </Route>
+          <Route>
+            <Route path="hotel/:id/booking" element={<Booking />} />
           </Route>
 
           {/* Private Route */}

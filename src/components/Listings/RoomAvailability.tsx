@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useGetHotelRoomsQuery } from "../../redux/api/hotelApi";
 import Loader from "../Loader";
 import { Icon } from "@iconify/react";
@@ -36,6 +37,7 @@ const noOfRoomsOptions = [
 ];
 
 const RoomAvailability = (props: any) => {
+  const navigate = useNavigate();
   const {
     data: hotelRooms,
     isError,
@@ -73,6 +75,10 @@ const RoomAvailability = (props: any) => {
   useEffect(() => {
     filterRooms(selectedRoomType?.value, noOfGuest?.value);
   }, [hotelRooms, selectedRoomType, noOfGuest]);
+
+  const handleProceed = () => {
+    navigate(`/hotel/${props?.hotelID}/booking`);
+  };
 
   if (isError)
     return (
@@ -246,6 +252,18 @@ const RoomAvailability = (props: any) => {
                 ))}
             </tbody>
           </table>
+        )}
+        {filteredRooms && filteredRooms?.length === 0 ? (
+          <></>
+        ) : (
+          <div className="flex justify-end mt-5">
+            <button
+              onClick={handleProceed}
+              className="py-3 px-3 border border-Blueviolet text-md font-medium bg-semiblueviolet hover:text-white hover:bg-Blueviolet"
+            >
+              Proceed
+            </button>
+          </div>
         )}
       </div>
     </>
