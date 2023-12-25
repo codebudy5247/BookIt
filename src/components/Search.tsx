@@ -93,7 +93,7 @@ const Search = () => {
               )}
             </div>
          
-          {/* <div
+          <div
             className="
               p-2 
               bg-Blueviolet
@@ -103,7 +103,7 @@ const Search = () => {
             "
           >
             <Icon icon="material-symbols:search" height={30} width={30} />
-          </div> */}
+          </div>
         </div>
       </section>
     </>

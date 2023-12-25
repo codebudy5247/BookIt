@@ -107,7 +107,6 @@ const HotelDetails = () => {
         {/* List of rooms */}
         <RoomAvailability
           hotelID={state?.hotel?._id}
-          isAvailable={isAvailable}
         />
       </Container>
     </div>
