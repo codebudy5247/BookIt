@@ -4,6 +4,7 @@ import { HotelResponse } from "../types/hotel";
 import Gallery from "../components/Listings/Gallery";
 import RoomAvailability from "../components/Listings/RoomAvailability";
 import { Icon } from "@iconify/react";
+import { useAppSelector } from "../redux/hook";
 
 interface CustomState {
   hotel: HotelResponse;
@@ -12,6 +13,19 @@ interface CustomState {
 const HotelDetails = () => {
   const location = useLocation();
   const state = location.state as CustomState;
+  const searchDetails = useAppSelector((state) => state.searchState.searchData);
+
+  const getDatesInRange = (startDate: Date, endDate: Date) => {
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+    const date = new Date(start.getTime());
+    const dates = [];
+    while (date <= end) {
+      dates.push(new Date(date).getTime());
+      date.setDate(date.getDate() + 1);
+    }
+    return dates;
+  };
 
   return (
     <div>
@@ -91,7 +105,10 @@ const HotelDetails = () => {
           </div> */}
         </div>
         {/* List of rooms */}
-        <RoomAvailability hotelID={state?.hotel?._id} />
+        <RoomAvailability
+          hotelID={state?.hotel?._id}
+          isAvailable={isAvailable}
+        />
       </Container>
     </div>
   );

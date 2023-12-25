@@ -25,7 +25,6 @@ const Navbar = () => {
     useLogoutUserMutation();
   const user = useAppSelector((state) => state.userState.user);
   localStorage.setItem("userData", JSON.stringify(user));
-  console.log(user);
 
   useEffect(() => {
     if (isSuccess) {

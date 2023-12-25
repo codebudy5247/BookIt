@@ -9,6 +9,7 @@ import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { format } from "date-fns";
 import { HotelRoomResponse } from "../../types/hotel";
+import { useAppSelector } from "../../redux/hook";
 
 const renderIcons = (num: any) => {
   const icons = [];
@@ -38,6 +39,7 @@ const noOfRoomsOptions = [
 
 const RoomAvailability = (props: any) => {
   const navigate = useNavigate();
+  const searchDetails = useAppSelector((state) => state.searchState.searchData);
   const {
     data: hotelRooms,
     isError,
@@ -163,8 +165,8 @@ const RoomAvailability = (props: any) => {
             <span
               onClick={() => setOpenDate(!openDate)}
               className="text-Blueviolet font-bold cursor-pointer"
-            >{`${format(dates[0].startDate, "MM/dd/yyyy")} to ${format(
-              dates[0].endDate,
+            >{`${format(searchDetails.checkInDate, "MM/dd/yyyy")} to ${format(
+              searchDetails.checkOutDate,
               "MM/dd/yyyy"
             )}`}</span>
 
@@ -200,16 +202,14 @@ const RoomAvailability = (props: any) => {
                 <th className="px-6 py-3 border-b-2 border-lightgray text-left text-xs font-semibold text-gray500 uppercase tracking-wider">
                   Price
                 </th>
-                <th className="px-6 py-3 border-b-2 border-lightgray text-left text-xs font-semibold text-gray500 uppercase tracking-wider">
-                  Select Room
-                </th>
+                <th className="px-6 py-3 border-b-2 border-lightgray text-left text-xs font-semibold text-gray500 uppercase tracking-wider"></th>
               </tr>
             </thead>
             <tbody>
               {filteredRooms &&
-                filteredRooms.map((room: any) => (
+                filteredRooms.map((room: any, index: any) => (
                   <>
-                    <tr key={room._id}>
+                    <tr key={index}>
                       <td className="px-6 py-4 whitespace-nowrap border border-lightgray">
                         {capitalizeFirstLetter(room?.roomType)}
                       </td>
@@ -222,12 +222,16 @@ const RoomAvailability = (props: any) => {
                         ₹ {room?.price}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap border border-lightgray">
-                        {room?.roomNumbers.map((data: any, index: any) => (
+                        <button className="py-2 px-2 text-sm text-Blueviolet font-medium bg-semiblueviolet hover:text-white hover:bg-Blueviolet">
+                          Select
+                        </button>
+                        {/* {room?.roomNumbers.map((data: any, index: any) => (
                           <div key={index}>
                             {data?.roomNumber}
                             <input
                               id="selectroom"
                               type="checkbox"
+                              disabled={!props?.isAvailable(data)}
                               className={`
                       peer
                       w-full
@@ -245,7 +249,7 @@ const RoomAvailability = (props: any) => {
                     `}
                             />
                           </div>
-                        ))}
+                        ))} */}
                       </td>
                     </tr>
                   </>
