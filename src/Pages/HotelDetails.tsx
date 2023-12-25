@@ -14,6 +14,8 @@ const HotelDetails = () => {
   const location = useLocation();
   const state = location.state as CustomState;
   const searchDetails = useAppSelector((state) => state.searchState.searchData);
+  console.log(searchDetails);
+  
 
   const getDatesInRange = (startDate: Date, endDate: Date) => {
     const start = new Date(startDate);

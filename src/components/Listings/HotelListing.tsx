@@ -26,6 +26,8 @@ const HotelList = (props: propTypes) => {
   const searchDetails = useAppSelector((state) => state.searchState.searchData);
   const filteredHotelData = filterData(searchDetails.destination, props.hotels);
 
+  console.log(searchDetails);
+  
   if (props.isError)
     return (
       <h1 className="mt-10 font-bold text-5xl text-center text-Blueviolet bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">

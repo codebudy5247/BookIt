@@ -1,21 +1,21 @@
 import { useNavigate } from "react-router-dom";
-
+import Search from "../Search";
 const HeroSection = () => {
   const navigate = useNavigate();
   return (
     <section className="flex items-center gap-12 container mx-auto">
       <div className="h-full">
         <h1 className="font-bold text-6xl mb-6">Explore Our Exquisite Hotel</h1>
-        <p className="text-[#4a4a4a] mb-12 max-w-lg">
-          Experience an Exquisite Hotel Immersed in Rich History and Timeless
-          Elegance.
+        <p className="text-gunmetalgray mb-12 max-w-lg text-2xl">
+          Find Your Perfect Place To Stay.
         </p>
         <button
-          className="text-Blueviolet text-lg font-medium py-5 px-16 transition duration-150 ease-in-out rounded-full bg-semiblueviolet hover:text-white hover:bg-Blueviolet"
+          className="text-Blueviolet text-lg font-medium py-5 px-10 transition duration-150 ease-in-out rounded-full bg-semiblueviolet hover:text-white hover:bg-Blueviolet"
           onClick={() => navigate("/hotels")}
         >
-          Get Started
+          Book Now
         </button>
+        {/* <Search /> */}
 
         {/* <div className="flex justify-between mt-12">
         <div className="flex gap-3 flex-col items-center justify-center">
