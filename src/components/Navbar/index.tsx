@@ -49,6 +49,7 @@ const Navbar = () => {
 
   const onLogoutHandler = async () => {
     logoutUser();
+    localStorage.removeItem("userData");
   };
 
   const toggleOpen = useCallback(() => {
