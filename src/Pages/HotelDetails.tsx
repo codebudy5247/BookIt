@@ -16,19 +16,6 @@ const HotelDetails = () => {
   const searchDetails = useAppSelector((state) => state.searchState.searchData);
   console.log(searchDetails);
   
-
-  const getDatesInRange = (startDate: Date, endDate: Date) => {
-    const start = new Date(startDate);
-    const end = new Date(endDate);
-    const date = new Date(start.getTime());
-    const dates = [];
-    while (date <= end) {
-      dates.push(new Date(date).getTime());
-      date.setDate(date.getDate() + 1);
-    }
-    return dates;
-  };
-
   return (
     <div>
       <Container>
@@ -109,6 +96,8 @@ const HotelDetails = () => {
         {/* List of rooms */}
         <RoomAvailability
           hotelID={state?.hotel?._id}
+          hotelName={state?.hotel?.name}
+          hotelLocation={state?.hotel?.location?.city}
         />
       </Container>
     </div>

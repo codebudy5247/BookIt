@@ -24,13 +24,11 @@ function App() {
           <Route>
             <Route path="hotel/:id" element={<HotelDetails />} />
           </Route>
-          <Route>
-            <Route path="hotel/:id/booking" element={<Booking />} />
-          </Route>
 
           {/* Private Route */}
           <Route element={<RequireUser allowedRoles={["user", "admin"]} />}>
             <Route path="profile" element={<UserProfile />} />
+            <Route path="hotel/:id/booking" element={<Booking />} />
           </Route>
 
           {/* Admin Routes */}

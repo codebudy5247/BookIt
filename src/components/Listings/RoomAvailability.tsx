@@ -10,6 +10,8 @@ import "react-date-range/dist/theme/default.css";
 import { format } from "date-fns";
 import { HotelRoomResponse } from "../../types/hotel";
 import { useAppSelector } from "../../redux/hook";
+import { Ibooking } from "../../types/booking";
+import { toast } from "react-toastify";
 
 const renderIcons = (num: any) => {
   const icons = [];
@@ -37,9 +39,24 @@ const noOfRoomsOptions = [
   { value: "5", label: "5" },
 ];
 
+const getDatesInRange = (startDate: Date, endDate: Date) => {
+  const start = new Date(startDate);
+  const end = new Date(endDate);
+  const date = new Date(start.getTime());
+  const dates = [];
+  while (date <= end) {
+    dates.push(new Date(date).getTime());
+    date.setDate(date.getDate() + 1);
+  }
+  return dates;
+};
+
 const RoomAvailability = (props: any) => {
   const navigate = useNavigate();
   const searchDetails = useAppSelector((state) => state.searchState.searchData);
+  const user = useAppSelector((state) => state.userState.user);
+  console.log(user, "user");
+
   const {
     data: hotelRooms,
     isError,
@@ -56,6 +73,7 @@ const RoomAvailability = (props: any) => {
   ]);
   const [openDate, setOpenDate] = useState(false);
   const [filteredRooms, setFilteredRooms] = useState<HotelRoomResponse[]>();
+  const [selectedRooms, setSelectedRooms] = useState<any>([]);
 
   const filterRooms = (
     roomType: string | undefined,
@@ -78,8 +96,46 @@ const RoomAvailability = (props: any) => {
     filterRooms(selectedRoomType?.value, noOfGuest?.value);
   }, [hotelRooms, selectedRoomType, noOfGuest]);
 
+  const handleSelect = (e: any) => {
+    const checked = e.target.checked;
+    const value = e.target.value;
+    setSelectedRooms(
+      checked
+        ? [...selectedRooms, value]
+        : selectedRooms.filter((item: any) => item !== value)
+    );
+  };
+
+  let allDates = getDatesInRange(
+    searchDetails?.checkInDate,
+    searchDetails.checkOutDate
+  );
+
+  let bookingData: Ibooking = {
+    hotel: {
+      name: props?.hotelName,
+      location: props?.hotelLocation,
+    },
+    checkIn: searchDetails?.checkInDate,
+    checkOut: searchDetails.checkOutDate,
+    stayLength: allDates?.length,
+    noOfGuest: noOfGuest,
+    totalPrice: selectedRooms?.reduce(
+      (accumulator: number, currentValue: number) => accumulator + currentValue,
+      0
+    ),
+  };
+
   const handleProceed = () => {
-    navigate(`/hotel/${props?.hotelID}/booking`);
+    if (!user && selectedRooms.length > 0) {
+      toast.success("You are not loggedIn!");
+    } else {
+      navigate(`/hotel/${props?.hotelID}/booking`, {
+        state: {
+          booking: bookingData,
+        },
+      });
+    }
   };
 
   if (isError)
@@ -93,6 +149,7 @@ const RoomAvailability = (props: any) => {
     <>
       <h2 className="font-bold text-3xl mb-4">Availability</h2>
 
+      {/* Search && filter */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-10">
           <div className="w-full md:1/3 lg:w-auto mb-4 md:mb-0">
@@ -202,7 +259,9 @@ const RoomAvailability = (props: any) => {
                 <th className="px-6 py-3 border-b-2 border-lightgray text-left text-xs font-semibold text-gray500 uppercase tracking-wider">
                   Price
                 </th>
-                <th className="px-6 py-3 border-b-2 border-lightgray text-left text-xs font-semibold text-gray500 uppercase tracking-wider"></th>
+                <th className="px-6 py-3 border-b-2 border-lightgray text-left text-xs font-semibold text-gray500 uppercase tracking-wider">
+                  Action
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -222,22 +281,15 @@ const RoomAvailability = (props: any) => {
                         ₹ {room?.price}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap border border-lightgray">
-                        <button className="py-2 px-2 text-sm text-Blueviolet font-medium bg-semiblueviolet hover:text-white hover:bg-Blueviolet">
-                          Select
-                        </button>
-                        {/* {room?.roomNumbers.map((data: any, index: any) => (
-                          <div key={index}>
-                            {data?.roomNumber}
-                            <input
-                              id="selectroom"
-                              type="checkbox"
-                              disabled={!props?.isAvailable(data)}
-                              className={`
+                        <input
+                          id="selectroom"
+                          type="checkbox"
+                          defaultValue={room?.price}
+                          onChange={handleSelect}
+                          className={`
                       peer
                       w-full
-                      p-4
-                      pt-4
-                      pl-5
+                      p-8
                       font-light 
                       bg-white 
                       rounded-md
@@ -245,11 +297,8 @@ const RoomAvailability = (props: any) => {
                       transition
                       disabled:opacity-70
                       disabled:cursor-not-allowed
-                      mb-3
                     `}
-                            />
-                          </div>
-                        ))} */}
+                        />
                       </td>
                     </tr>
                   </>

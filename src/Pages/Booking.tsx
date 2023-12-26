@@ -1,5 +1,14 @@
 import Container from "../components/Container"
+import { useLocation } from "react-router-dom";
+import { Ibooking } from "../types/booking"
+
+interface CustomState {
+  booking: Ibooking;
+}
 const Booking = () => {
+  const location = useLocation();
+  const state = location.state as CustomState;
+
   return (
     <>
     <Container>
@@ -8,38 +17,35 @@ const Booking = () => {
       <div className="border-b py-2">
         Location:
         <div className="font-bold">
-            {/* {`${hotel.name}, ${hotel.city}, ${hotel.country}`} */}
-            SPOT ON Janapriya Lodge Near Hare Krishna Hill, Bangalore
+            {`${state?.booking?.hotel?.name}, ${state?.booking?.hotel?.location}`}
+           
         </div>
       </div>
       <div className="flex justify-between">
         <div>
           Check-in
           <div className="font-bold"> 
-          {/* {checkIn.toDateString()} */}
-          22/12/2023
+          {state?.booking?.checkIn?.toDateString()}
           </div>
         </div>
         <div>
           Check-out
           <div className="font-bold">
-             {/* {checkOut.toDateString()} */}
-             22/12/2023
+           {state?.booking?.checkOut?.toDateString()}
           </div>
         </div>
       </div>
       <div className="border-t border-b py-2">
         Total length of stay:
         <div className="font-bold">
-            {3} nights
+            {state?.booking?.stayLength} nights
         </div>
       </div>
 
       <div>
-        Guests{" "}
+        Price{" "}
         <div className="font-bold">
-          {/* {adultCount} adults & {childCount} children */}
-          5
+          {state?.booking?.totalPrice}
         </div>
       </div>
     </div>
