@@ -3,16 +3,6 @@ import { useNavigate } from "react-router-dom";
 const ListingCard = (props: any) => {
   const navigate = useNavigate();
 
-  // navigate(PATH_SIGNUP.emailVerification, {
-  //   state: {
-  //     FirstName: firstName,
-  //     LastName: lastName,
-  //     Email: data?.email!,
-  //     CompanyRelation: companyRelation,
-  //     Phone: userPhone,
-  //   },
-  // });
-
   const onClickHandler = () => {
     navigate(`/hotel/${props?.data._id}`, {
       state: {
