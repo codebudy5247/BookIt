@@ -13,7 +13,7 @@ const filterData = (query: string, data: HotelResponse[]) => {
   if (!query) {
     return data;
   } else {
-    let filteredData = data.filter(
+    let filteredData = data?.filter(
       (d: any) =>
         d?.location?.state?.toLowerCase().includes(query) ||
         d?.location?.city?.toLowerCase().includes(query)
@@ -26,7 +26,7 @@ const HotelList = (props: propTypes) => {
   const searchDetails = useAppSelector((state) => state.searchState.searchData);
   const filteredHotelData = filterData(searchDetails.destination, props.hotels);
 
-  console.log(searchDetails);
+  console.log({searchDetails});
   
   if (props.isError)
     return (

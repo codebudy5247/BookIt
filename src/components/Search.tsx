@@ -22,6 +22,9 @@ const Search = () => {
   const [openDate, setOpenDate] = useState(false);
   const [destination, setDestination] = useState();
 
+  console.log(destination, "destination.....");
+  console.log(dates, "dates.....");
+
   const handleOnChangeDestination = (e: any) => {
     setDestination(e.target.value);
     dispatch(
@@ -35,13 +38,6 @@ const Search = () => {
 
   const handleOnChangeDates = (item: any) => {
     setDates([item.selection]);
-    dispatch(
-      SearchData({
-        destination,
-        checkInDate: dates[0].startDate,
-        checkOutDate: dates[0].endDate,
-      })
-    );
   };
 
   const handleClickEvent = () => {
@@ -101,27 +97,32 @@ const Search = () => {
               </div>
             </div>
             {/* Select Date */}
-            <div className="flex items-center gap-4">
-              <Icon icon="mdi:calendar-outline" width={30} height={30} />
-              <span
-                onClick={() => setOpenDate(!openDate)}
-                className="text-Blueviolet cursor-pointer"
-              >{`${format(searchDetails.checkInDate, "MM/dd/yyyy")} to ${format(
-                searchDetails.checkOutDate,
-                "MM/dd/yyyy"
-              )}`}</span>
+            {location.pathname === "/" && (
+              <div className="flex items-center gap-4">
+                <Icon icon="mdi:calendar-outline" width={30} height={30} />
+                <span
+                  onClick={() => setOpenDate(!openDate)}
+                  className="text-Blueviolet cursor-pointer"
+                >{`${format(
+                  searchDetails.checkInDate,
+                  "MM/dd/yyyy"
+                )} to ${format(
+                  searchDetails.checkOutDate,
+                  "MM/dd/yyyy"
+                )}`}</span>
 
-              {openDate && (
-                <DateRange
-                  editableDateInputs={true}
-                  onChange={handleOnChangeDates}
-                  moveRangeOnFirstSelection={false}
-                  ranges={dates}
-                  minDate={new Date()}
-                  className="absolute top-[180px] z-20"
-                />
-              )}
-            </div>
+                {openDate && (
+                  <DateRange
+                    editableDateInputs={true}
+                    onChange={handleOnChangeDates}
+                    moveRangeOnFirstSelection={false}
+                    ranges={dates}
+                    minDate={new Date()}
+                    className="absolute top-[180px] z-20"
+                  />
+                )}
+              </div>
+            )}
           </div>
 
           {location.pathname === "/" && (
