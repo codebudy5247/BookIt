@@ -6,6 +6,6 @@ export interface Ibooking {
   checkIn: Date;
   checkOut: Date;
   stayLength: number;
-  noOfGuest: string;
+  noOfGuest: number;
   totalPrice: number;
 }

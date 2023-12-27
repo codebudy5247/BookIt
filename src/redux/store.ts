@@ -4,7 +4,8 @@ import { hotelApi } from "./api/hotelApi";
 import { authApi } from "./api/authApi";
 import { userApi } from "./api/userApi";
 import userReducer from "./features/userSlice";
-import searchReducer from "./features/searchSlice"
+import searchReducer from "./features/searchSlice";
+import bookingReducer from "./features/bookingSlice";
 
 export const store = configureStore({
   reducer: {
@@ -13,10 +14,11 @@ export const store = configureStore({
     [userApi.reducerPath]: userApi.reducer,
     userState: userReducer,
     searchState: searchReducer,
+    bookingState: bookingReducer,
   },
   devTools: true,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({serializableCheck: false}).concat([
+    getDefaultMiddleware({ serializableCheck: false }).concat([
       hotelApi.middleware,
       authApi.middleware,
       userApi.middleware,

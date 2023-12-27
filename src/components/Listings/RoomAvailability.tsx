@@ -9,9 +9,9 @@ import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { format } from "date-fns";
 import { HotelRoomResponse } from "../../types/hotel";
-import { useAppSelector } from "../../redux/hook";
+import { useAppSelector, useAppDispatch } from "../../redux/hook";
 import { Ibooking } from "../../types/booking";
-import { toast } from "react-toastify";
+import { bookingDetails } from "../../redux/features/bookingSlice";
 
 const renderIcons = (num: any) => {
   const icons = [];
@@ -53,9 +53,8 @@ const getDatesInRange = (startDate: Date, endDate: Date) => {
 
 const RoomAvailability = (props: any) => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const searchDetails = useAppSelector((state) => state.searchState.searchData);
-  const user = useAppSelector((state) => state.userState.user);
-  console.log(user, "user");
 
   const {
     data: hotelRooms,
@@ -127,15 +126,8 @@ const RoomAvailability = (props: any) => {
   };
 
   const handleProceed = () => {
-    if (!user && selectedRooms.length > 0) {
-      toast.success("You are not loggedIn!");
-    } else {
-      navigate(`/hotel/${props?.hotelID}/booking`, {
-        state: {
-          booking: bookingData,
-        },
-      });
-    }
+    dispatch(bookingDetails(bookingData));
+    navigate(`/hotel/${props?.hotelID}/booking`);
   };
 
   if (isError)

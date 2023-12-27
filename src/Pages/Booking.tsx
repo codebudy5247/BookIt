@@ -1,13 +1,10 @@
 import Container from "../components/Container"
-import { useLocation } from "react-router-dom";
-import { Ibooking } from "../types/booking"
+import { useAppSelector } from "../redux/hook";
 
-interface CustomState {
-  booking: Ibooking;
-}
 const Booking = () => {
-  const location = useLocation();
-  const state = location.state as CustomState;
+  const bookingDetails = useAppSelector((state) => state.bookingState);
+  console.log({bookingDetails});
+  
 
   return (
     <>
@@ -17,7 +14,7 @@ const Booking = () => {
       <div className="border-b py-2">
         Location:
         <div className="font-bold">
-            {`${state?.booking?.hotel?.name}, ${state?.booking?.hotel?.location}`}
+            {`${bookingDetails?.hotel?.name}, ${bookingDetails?.hotel?.location}`}
            
         </div>
       </div>
@@ -25,27 +22,27 @@ const Booking = () => {
         <div>
           Check-in
           <div className="font-bold"> 
-          {state?.booking?.checkIn?.toDateString()}
+          {bookingDetails?.checkIn?.toDateString()}
           </div>
         </div>
         <div>
           Check-out
           <div className="font-bold">
-           {state?.booking?.checkOut?.toDateString()}
+           {bookingDetails?.checkOut?.toDateString()}
           </div>
         </div>
       </div>
       <div className="border-t border-b py-2">
         Total length of stay:
         <div className="font-bold">
-            {state?.booking?.stayLength} nights
+            {bookingDetails?.stayLength} nights
         </div>
       </div>
 
       <div>
         Price{" "}
         <div className="font-bold">
-          {state?.booking?.totalPrice}
+          {bookingDetails?.totalPrice}
         </div>
       </div>
     </div>
