@@ -1,11 +1,10 @@
 import { useNavigate } from "react-router-dom";
+import LogoImg from "../assets/images/logo.jpg"
 const Logo = () => {
   const navigate = useNavigate()
   return (
     <div className="flex flex-shrink-0 items-center cursor-pointer" onClick={() => navigate('/hotels')}>
-      <h1 className="font-extrabold underline text-5xl text-Blueviolet bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
-        BookIt
-      </h1>
+      <img src={LogoImg} height={70} width={70}  />
     </div>
   );
 };
