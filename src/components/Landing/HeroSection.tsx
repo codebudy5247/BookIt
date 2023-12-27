@@ -9,28 +9,6 @@ const HeroSection = () => {
         <p className="text-gunmetalgray mb-12 max-w-lg text-2xl">
           Find Your Perfect Place To Stay.
         </p>
-        <button
-          className="text-Blueviolet text-lg font-medium py-5 px-10 transition duration-150 ease-in-out rounded-full bg-semiblueviolet hover:text-white hover:bg-Blueviolet"
-          onClick={() => navigate("/hotels")}
-        >
-          Book Now
-        </button>
-        {/* <Search /> */}
-
-        {/* <div className="flex justify-between mt-12">
-        <div className="flex gap-3 flex-col items-center justify-center">
-          <p className="text-xs lg:text-xl text-center">Basic Room</p>
-          <CountUpNumber duration={5000} endValue={50} />
-        </div>
-        <div className="flex gap-3 flex-col items-center justify-center">
-          <p className="text-xs lg:text-xl text-center">Luxury Room</p>
-          <CountUpNumber duration={5000} endValue={120} />
-        </div>
-        <div className="flex gap-3 flex-col items-center justify-center">
-          <p className="text-xs lg:text-xl text-center">Suite</p>
-          <CountUpNumber duration={5000} endValue={60} />
-        </div>
-      </div> */}
       </div>
 
       <div className="md:grid hidden gap-8 grid-cols-1">
