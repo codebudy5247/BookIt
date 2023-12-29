@@ -39,6 +39,8 @@ const Navbar = () => {
   const [currentLink, setCurrentLink] = useState("/hotels");
 
   const [cookies] = useCookies(["logged_in"]);
+  console.log(cookies);
+  
   const logged_in = cookies.logged_in;
 
   const [logoutUser, { isLoading, isSuccess, error, isError }] =
@@ -48,6 +50,7 @@ const Navbar = () => {
 
   useEffect(() => {
     if (isSuccess) {
+      localStorage.removeItem("userData");
       window.location.href = "/login";
     }
 
@@ -69,7 +72,6 @@ const Navbar = () => {
 
   const onLogoutHandler = async () => {
     logoutUser();
-    localStorage.removeItem("userData");
   };
 
   const handleLinkClick = (href: string) => {
