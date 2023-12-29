@@ -1,22 +1,42 @@
 import { Disclosure } from "@headlessui/react";
-import { useNavigate } from "react-router-dom";
-import { useState, useEffect, useCallback } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { Icon } from "@iconify/react";
 import Logo from "../Logo";
 import Drawer from "../Drawer";
 import Drawerdata from "./DrawerData";
 import Avatar from "../Avatar";
-import MenuItem from "../MenuItem";
 import { useCookies } from "react-cookie";
 import { useAppSelector } from "../../redux/hook";
 import { useLogoutUserMutation } from "../../redux/api/authApi";
 import { toast } from "react-toastify";
 
+function classNames(...classes: string[]) {
+  return classes.filter(Boolean).join(" ");
+}
+
+const CustomLink = ({
+  href,
+  onClick,
+  children,
+}: {
+  href: string;
+  onClick: () => void;
+  children: React.ReactNode;
+}) => {
+  return (
+    <Link to={href}>
+      <span onClick={onClick} className="px-3 py-4 text-lg font-normal">
+        {children}
+      </span>
+    </Link>
+  );
+};
+
 const Navbar = () => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
-
-  const [menuItemIsOpen, setMenuItemIsOpen] = useState(false);
+  const [currentLink, setCurrentLink] = useState("/hotels");
 
   const [cookies] = useCookies(["logged_in"]);
   const logged_in = cookies.logged_in;
@@ -52,9 +72,9 @@ const Navbar = () => {
     localStorage.removeItem("userData");
   };
 
-  const toggleOpen = useCallback(() => {
-    setMenuItemIsOpen((value) => !value);
-  }, []);
+  const handleLinkClick = (href: string) => {
+    setCurrentLink(href);
+  };
 
   return (
     <Disclosure as="nav" className="navbar">
@@ -62,10 +82,64 @@ const Navbar = () => {
         <div className="mx-auto max-w-7xl px-6 py-4 lg:px-8">
           <div className="relative flex h-12 md:h-20 items-center justify-between">
             <div className="flex flex-1 items-center sm:items-stretch sm:justify-start">
-              {/* LOGO */}
               <Logo />
-
-              {/* LINKS */}
+              <div className="hidden lg:block m-auto">
+                <div className="flex space-x-4">
+                  <CustomLink
+                    key="Home"
+                    href="/hotels"
+                    onClick={() => handleLinkClick("/hotels")}
+                  >
+                    <span
+                      className={classNames(
+                        "/hotels" === currentLink
+                          ? "underline-links"
+                          : "text-slategray",
+                        "px-3 py-4 text-lg font-normal opacity-75 hover:opacity-100"
+                      )}
+                      aria-current={"/hotels" ? "page" : undefined}
+                    >
+                      Home
+                    </span>
+                  </CustomLink>
+                  <CustomLink
+                    key="About"
+                    href="/"
+                    onClick={() => handleLinkClick("/")}
+                  >
+                    <span
+                      className={classNames(
+                        "/" === currentLink
+                          ? "underline-links"
+                          : "text-slategray",
+                        "px-3 py-4 text-lg font-normal opacity-75 hover:opacity-100"
+                      )}
+                      aria-current={"/" ? "page" : undefined}
+                    >
+                      About
+                    </span>
+                  </CustomLink>
+                  {user?.role === "admin" && (
+                    <CustomLink
+                      key="Admin"
+                      href="/admin"
+                      onClick={() => handleLinkClick("/admin")}
+                    >
+                      <span
+                        className={classNames(
+                          "/admin" === currentLink
+                            ? "underline-links"
+                            : "text-slategray",
+                          "px-3 py-4 text-lg font-normal opacity-75 hover:opacity-100"
+                        )}
+                        aria-current={"/admin" ? "page" : undefined}
+                      >
+                        Admin
+                      </span>
+                    </CustomLink>
+                  )}
+                </div>
+              </div>
 
               <div className="hidden lg:block m-auto">
                 <div className="flex space-x-4"></div>
@@ -73,7 +147,6 @@ const Navbar = () => {
             </div>
 
             <div className="flex gap-3 items-center">
-              {/* <UserLocationDialog /> */}
               {!logged_in && (
                 <>
                   <div className="hidden lg:block">
@@ -100,49 +173,22 @@ const Navbar = () => {
                 <div className="flex gap-3 items-center">
                   <div
                     className="hidden lg:block cursor-pointer"
-                    onClick={toggleOpen}
+                    onClick={() => navigate("/profile")}
                   >
                     <Avatar src={user?.avatar} />
                   </div>
 
-                  {/* Menu Item */}
-                  {menuItemIsOpen && (
-                    <div
-                      className="
-                      absolute 
-                      rounded-xl 
-                      shadow-md
-                      w-auto
-                      bg-white 
-                      overflow-hidden 
-                      right-0 
-                      top-12 
-                      text-sm
-                    "
-                    >
-                      <div className="flex flex-col cursor-pointer">
-                        <>
-                          <MenuItem
-                            label="Profile"
-                            onClick={() => navigate("/profile")}
-                          />
-                          <MenuItem label="My favorites" />
-                          <MenuItem label="My reservations" />
-                          {user?.role === "admin" && (
-                            <MenuItem
-                              label="Admin"
-                              onClick={() => navigate("/admin")}
-                            />
-                          )}
-                          <hr />
-                          <MenuItem
-                            label="Logout"
-                            onClick={() => onLogoutHandler()}
-                          />
-                        </>
-                      </div>
-                    </div>
-                  )}
+                  <div
+                    className="hidden lg:block cursor-pointer"
+                    onClick={() => onLogoutHandler()}
+                  >
+                    <Icon
+                      icon="material-symbols:logout"
+                      width={40}
+                      height={40}
+                      color="blue"
+                    />
+                  </div>
                 </div>
               )}
             </div>
