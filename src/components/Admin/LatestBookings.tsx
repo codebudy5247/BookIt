@@ -1,7 +1,13 @@
-import React from "react";
 
 const LatestBookings = () => {
-  return <div className="text-cornflowerblue">LatestBookings</div>;
+  return (
+    <div className="w-full">
+     <h2 className="text-cornflowerblue font-bold text-xl">
+     LatestBookings
+     </h2>
+
+    </div>
+  )
 };
 
 export default LatestBookings;

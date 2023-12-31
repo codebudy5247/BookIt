@@ -58,7 +58,7 @@ const SalesStats = () => {
     },
   ];
   return (
-    <div className="w-full" style={{ height: "60vh" }}>
+    <div className="w-full" style={{ height: "65vh" }}>
       <h2 className="mt-5 mb-3 text-cornflowerblue font-bold text-xl">
         Sales statistics
       </h2>
