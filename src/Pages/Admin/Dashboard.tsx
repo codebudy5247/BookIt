@@ -1,14 +1,21 @@
-import Container from "../../components/Container"
+import Layout from "../../components/Admin/Layout";
+import Header from "../../components/Admin/Header";
+import Widget from "../../components/Admin/Widget";
+import SalesStats from "../../components/Admin/SalesStats";
+import LatestBookings from "../../components/Admin/LatestBookings";
 const Dashboard = () => {
   return (
-    <div>
-        <Container>
-        <h1 className="font-extrabold text-center text-5xl text-Blueviolet bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
-          Admin Dashboard.
-        </h1>
-      </Container>
-    </div>
-  )
-}
+    <Layout>
+      <Header />
+      <div className="md:w-8/12 grow">
+        <Widget />
+        <SalesStats />
+      </div>
+      <div className="md:w-4/12 grow">
+        <LatestBookings />
+      </div>
+    </Layout>
+  );
+};
 
-export default Dashboard
+export default Dashboard;
