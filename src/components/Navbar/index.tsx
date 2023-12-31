@@ -1,5 +1,5 @@
 import { Disclosure } from "@headlessui/react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Icon } from "@iconify/react";
 import Logo from "../Logo";
@@ -35,6 +35,7 @@ const CustomLink = ({
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const [currentLink, setCurrentLink] = useState("/hotels");
 
@@ -85,6 +86,8 @@ const Navbar = () => {
       localStorage.removeItem("userData");
     }
   }, [logged_in]);
+
+  if (location.pathname === "/admin") return <></>;
 
   return (
     <Disclosure as="nav" className="navbar">
