@@ -80,6 +80,12 @@ const Navbar = () => {
     setCurrentLink(href);
   };
 
+  useEffect(() => {
+    if (!logged_in) {
+      localStorage.removeItem("userData");
+    }
+  }, [logged_in]);
+
   return (
     <Disclosure as="nav" className="navbar">
       <>
