@@ -3,8 +3,6 @@ import { IGenericResponse, RegisterUser, LoginUser } from "../../types/user";
 import customFetchBase from './customFetchBase';
 import { userApi } from "./userApi";
 
-const BASE_URL = "http://localhost:1337";
-
 export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: customFetchBase,
