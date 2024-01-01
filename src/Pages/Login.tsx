@@ -17,7 +17,7 @@ const Login = () => {
   const [loginUser, { isLoading, isError, error, isSuccess }] =
     useLoginUserMutation();
 
-  const from = ((location.state as any)?.from.pathname as string) || "/hotels";
+  const from = ((location.state as any)?.from.pathname as string) || "/";
 
   console.log(from,"from.....");
   

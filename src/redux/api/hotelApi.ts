@@ -1,13 +1,10 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi } from "@reduxjs/toolkit/query/react";
 import { HotelResponse,HotelRoomResponse } from "../../types/hotel";
-
-const BASE_URL = "http://localhost:1337";
+import customFetchBase from './customFetchBase';
 
 export const hotelApi = createApi({
   reducerPath: "hotelApi",
-  baseQuery: fetchBaseQuery({
-    baseUrl: `${BASE_URL}/api`,
-  }),
+  baseQuery: customFetchBase,
   tagTypes: ["Hotels"],
   endpoints: (builder) => ({
     getHotels: builder.query<HotelResponse[], void>({
@@ -26,7 +23,7 @@ export const hotelApi = createApi({
           url: `/hotel/${id}`,
         };
       },
-      // providesTags: (result, error, id) => [{ type: 'Hotels', id }],
+      providesTags: (result, error, id) => [{ type: 'Hotels', id }],
     }),
     getHotelRooms: builder.query<HotelRoomResponse[], string>({
       query(id) {
@@ -34,7 +31,7 @@ export const hotelApi = createApi({
           url: `/hotel/rooms/${id}`,
         };
       },
-      // providesTags: (result, error, id) => [{ type: 'Hotels', id }],
+      providesTags: (result, error, id) => [{ type: 'Hotels', id }],
     }),
   }),
 });

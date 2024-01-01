@@ -1,19 +1,18 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi } from "@reduxjs/toolkit/query/react";
 import { IGenericResponse, RegisterUser, LoginUser } from "../../types/user";
+import customFetchBase from './customFetchBase';
 import { userApi } from "./userApi";
 
 const BASE_URL = "http://localhost:1337";
 
 export const authApi = createApi({
   reducerPath: "authApi",
-  baseQuery: fetchBaseQuery({
-    baseUrl: `${BASE_URL}/api/auth/`,
-  }),
+  baseQuery: customFetchBase,
   endpoints: (builder) => ({
     registerUser: builder.mutation<IGenericResponse, RegisterUser>({
       query(data) {
         return {
-          url: "register",
+          url: "auth/register",
           method: "POST",
           body: data,
         };
@@ -25,7 +24,7 @@ export const authApi = createApi({
     >({
       query(data) {
         return {
-          url: "login",
+          url: "auth/login",
           method: "POST",
           body: data,
           credentials: "include",
@@ -41,7 +40,7 @@ export const authApi = createApi({
     logoutUser: builder.mutation<void, void>({
       query() {
         return {
-          url: "logout",
+          url: "auth/logout",
           credentials: "include",
         };
       },
