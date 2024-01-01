@@ -100,8 +100,8 @@ const Navbar = () => {
                 <div className="flex space-x-4">
                   <CustomLink
                     key="Home"
-                    href="/hotels"
-                    onClick={() => handleLinkClick("/hotels")}
+                    href="/"
+                    onClick={() => handleLinkClick("/")}
                   >
                     <span
                       className={classNames(
@@ -110,12 +110,12 @@ const Navbar = () => {
                           : "text-slategray",
                         "px-3 py-4 text-lg font-normal opacity-75 hover:opacity-100"
                       )}
-                      aria-current={"/hotels" ? "page" : undefined}
+                      aria-current={"/" ? "page" : undefined}
                     >
                       Home
                     </span>
                   </CustomLink>
-                  <CustomLink
+                  {/* <CustomLink
                     key="About"
                     href="/"
                     onClick={() => handleLinkClick("/")}
@@ -131,7 +131,7 @@ const Navbar = () => {
                     >
                       About
                     </span>
-                  </CustomLink>
+                  </CustomLink> */}
                   {user?.role === "admin" && (
                     <CustomLink
                       key="Admin"

@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
 import { DateRange } from "react-date-range";
 import "react-date-range/dist/styles.css";
@@ -8,8 +7,6 @@ import { format } from "date-fns";
 import { useAppDispatch, useAppSelector } from "../redux/hook";
 import { SearchData } from "../redux/features/searchSlice";
 const Search = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const searchDetails = useAppSelector((state) => state.searchState.searchData);
   const [dates, setDates] = useState<any>([
@@ -40,8 +37,7 @@ const Search = () => {
     setDates([item.selection]);
   };
 
-  const handleClickEvent = () => {
-    navigate("/hotels");
+  useEffect(() => {
     dispatch(
       SearchData({
         destination,
@@ -49,11 +45,12 @@ const Search = () => {
         checkOutDate: dates[0].endDate,
       })
     );
-  };
+  }, [destination,dates])
+  
 
   return (
     <>
-      <section className="bg-white shadow-xl px-4 py-3 rounded-lg mt-5">
+      <section className="bg-white shadow-lg px-4 py-3 rounded-lg">
         <div className="container mx-auto flex items-center justify-between">
           <div className="flex items-center gap-20">
             {/* Search Bar */}
@@ -97,8 +94,7 @@ const Search = () => {
               </div>
             </div>
             {/* Select Date */}
-            {location.pathname === "/" && (
-              <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4">
                 <Icon icon="mdi:calendar-outline" width={30} height={30} />
                 <span
                   onClick={() => setOpenDate(!openDate)}
@@ -122,11 +118,9 @@ const Search = () => {
                   />
                 )}
               </div>
-            )}
           </div>
 
-          {location.pathname === "/" && (
-            <div
+          {/* <div
               onClick={handleClickEvent}
               className="
               p-2 
@@ -137,8 +131,7 @@ const Search = () => {
             "
             >
               <Icon icon="material-symbols:search" height={30} width={30} />
-            </div>
-          )}
+            </div> */}
         </div>
       </section>
     </>
