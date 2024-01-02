@@ -29,7 +29,7 @@ export interface PaymentIntentInput {
 }
 
 export interface PaymentIntentResponse {
-  bookingId:string;
+  hotelId:string;
   paymentIntentId:string;
   clientSecret:string;
   totalAmount:string
