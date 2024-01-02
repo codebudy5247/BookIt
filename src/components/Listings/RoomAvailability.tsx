@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useGetHotelRoomsQuery } from "../../redux/api/hotelApi";
 import Loader from "../Loader";
@@ -72,7 +72,10 @@ const RoomAvailability = (props: any) => {
   ]);
   const [openDate, setOpenDate] = useState(false);
   const [filteredRooms, setFilteredRooms] = useState<HotelRoomResponse[]>();
+  const [selectedRoomsIDs, setSelectedRoomsIDs] = useState<string[]>([]);
   const [selectedRooms, setSelectedRooms] = useState<any>([]);
+
+  console.log({ selectedRooms });
 
   const filterRooms = (
     roomType: string | undefined,
@@ -95,16 +98,36 @@ const RoomAvailability = (props: any) => {
     filterRooms(selectedRoomType?.value, noOfGuest?.value);
   }, [hotelRooms, selectedRoomType, noOfGuest]);
 
-  const handleSelect = (e: any) => {
+  const handleSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const checked = e.target.checked;
     const value = e.target.value;
-    setSelectedRooms(
-      checked
-        ? [...selectedRooms, value]
-        : selectedRooms.filter((item: any) => item !== value)
-    );
+
+    if (checked) {
+      setSelectedRoomsIDs((prevSelected) => [...prevSelected, value]);
+    } else {
+      setSelectedRoomsIDs((prevSelected) =>
+        prevSelected.filter((id) => id !== value)
+      );
+    }
   };
 
+  const getSelectedRoomObjects = () => {
+    let selected_rooms = hotelRooms?.filter((room) =>
+      selectedRoomsIDs.includes(room._id)
+    );
+    setSelectedRooms(selected_rooms);
+  };
+
+  useEffect(() => {
+    getSelectedRoomObjects();
+  }, [selectedRoomsIDs]);
+
+  // Calculate total price of selected rooms
+  const totalPrice = selectedRooms?.reduce((acc: any, room: any) => {
+    const roomPrice = room.price;
+    return acc + roomPrice;
+  }, 0);
+ 
   let allDates = getDatesInRange(
     searchDetails?.checkInDate,
     searchDetails.checkOutDate
@@ -119,10 +142,7 @@ const RoomAvailability = (props: any) => {
     checkOut: searchDetails.checkOutDate,
     stayLength: allDates?.length,
     noOfGuest: noOfGuest,
-    totalPrice: selectedRooms?.reduce(
-      (accumulator: number, currentValue: number) => accumulator + currentValue,
-      0
-    ),
+    totalPrice: totalPrice,
   };
 
   const handleProceed = () => {
@@ -276,7 +296,7 @@ const RoomAvailability = (props: any) => {
                         <input
                           id="selectroom"
                           type="checkbox"
-                          defaultValue={room?.price}
+                          defaultValue={room?._id}
                           onChange={handleSelect}
                           className={`
                       peer
