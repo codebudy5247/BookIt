@@ -1,5 +1,6 @@
 export interface Ibooking {
   hotel: {
+    id:string;
     name: string;
     location: string;
   };
@@ -12,6 +13,14 @@ export interface Ibooking {
     paymentIntentId: string;
     clientSecret: string;
   };
+  // selectedRooms:Room[];
+}
+
+export interface Room {
+  roomType: string;
+  maxPeople: number;
+  price: number;
+  description: string;
 }
 
 export interface CreateBookingInput {
@@ -35,12 +44,12 @@ export interface BookingResponse {
   hotel: string;
   user: string;
   selectedRoomType: string;
-  payment:{
+  payment: {
     paymentIntentId: string;
-    clientSecret:string;
-    paymentStatus:boolean;
-    _id:string;
-  }
+    clientSecret: string;
+    paymentStatus: boolean;
+    _id: string;
+  };
   createdAt: Date;
   updatedAt: Date;
   __v: number;

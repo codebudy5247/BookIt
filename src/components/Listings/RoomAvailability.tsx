@@ -77,6 +77,8 @@ const RoomAvailability = (props: any) => {
   const [selectedRoomsIDs, setSelectedRoomsIDs] = useState<string[]>([]);
   const [selectedRooms, setSelectedRooms] = useState<any>([]);
 
+  console.log({ selectedRooms });
+
   const filterRooms = (
     roomType: string | undefined,
     maxPeople: number | undefined
@@ -173,6 +175,7 @@ const RoomAvailability = (props: any) => {
 
       let bookingData: Ibooking = {
         hotel: {
+          id: props?.hotelID,
           name: props?.hotelName,
           location: props?.hotelLocation,
         },
@@ -271,7 +274,12 @@ const RoomAvailability = (props: any) => {
           </div>
 
           <div className="flex items-center gap-4">
-            <Icon icon="mdi:calendar-outline" width={30} height={30} color="blue"/>
+            <Icon
+              icon="mdi:calendar-outline"
+              width={30}
+              height={30}
+              color="blue"
+            />
             <span
               onClick={() => setOpenDate(!openDate)}
               className="text-Blueviolet font-bold cursor-pointer"

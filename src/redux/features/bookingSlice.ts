@@ -3,6 +3,7 @@ import { Ibooking } from "../../types/booking";
 
 const initialStateVal: Ibooking = {
   hotel: {
+    id: "",
     name: "",
     location: "",
   },
@@ -23,7 +24,7 @@ export const bookingSlice = createSlice({
   reducers: {
     bookingDetails: (state, action) => {
       const {
-        hotel: { name, location },
+        hotel: { id, name, location },
         checkIn,
         checkOut,
         stayLength,
@@ -35,6 +36,7 @@ export const bookingSlice = createSlice({
       return {
         ...state,
         hotel: {
+          id,
           name,
           location,
         },
