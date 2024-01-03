@@ -15,18 +15,18 @@ const HotelDetails = () => {
   const state = location.state as CustomState;
   const searchDetails = useAppSelector((state) => state.searchState.searchData);
   console.log(searchDetails);
-  
+
   return (
     <div>
       <Container>
-        <h2 className="font-bold text-lg md:text-2xl mb-2">
+        <h2 className="font-bold text-lg md:text-2xl mb-2 text-Blueviolet">
           {state?.hotel?.name}
         </h2>
         <Gallery photos={state?.hotel?.images} />
         <div className="md:grid md:grid-cols-12 gap-10 mt-4">
           <div className="md:col-span-8 md:w-full">
             <div>
-              <h2 className="font-bold text-3xl mb-2">Amenities</h2>
+              <h2 className="font-bold text-3xl mb-2 text-Blueviolet">Amenities</h2>
               <div className="flex items-center gap-3">
                 {state?.hotel?.amenities.map((amenity) => (
                   <div key={amenity} className="flex">
@@ -36,30 +36,31 @@ const HotelDetails = () => {
                       height={40}
                       width={40}
                     />
-                    <p className="text-xs md:text-base pt-3">
+                    <p className="text-xs md:text-base pt-3 text-cornflowerblue">
                       {capitalizeFirstLetter(amenity)}
                     </p>
                   </div>
                 ))}
               </div>
               <div className="mb-8 mt-4">
-                <h2 className="font-bold text-3xl mb-2">Description</h2>
-                <p>{state?.hotel?.description}</p>
+                <h2 className="font-bold text-3xl mb-2 text-Blueviolet">Description</h2>
+                <p className="text-cornflowerblue">{state?.hotel?.description}</p>
               </div>
               <div className="mb-11">
-                <h2 className="font-bold text-3xl mb-2">Safety And Hygiene</h2>
+                <h2 className="font-bold text-3xl mb-2 text-Blueviolet">Safety And Hygiene</h2>
                 <div className="grid grid-cols-2">
                   <div className="flex items-center my-2 md:my-0">
-                    <Icon icon="healthicons:cleaning" height={30} width={30} />
-                    <p className="ml-2 md:text-base text-sm">Daily Cleaning</p>
+                    <Icon icon="healthicons:cleaning" height={30} width={30}  color="blue"/>
+                    <p className="ml-2 md:text-base text-sm text-cornflowerblue">Daily Cleaning</p>
                   </div>
                   <div className="flex items-center my-2 md:my-0">
                     <Icon
                       icon="ic:outline-fire-extinguisher"
                       height={30}
                       width={30}
+                      color="blue"
                     />
-                    <p className="ml-2 md:text-base text-sm">
+                    <p className="ml-2 md:text-base text-sm text-cornflowerblue">
                       Fire Extinguishers
                     </p>
                   </div>
@@ -68,14 +69,15 @@ const HotelDetails = () => {
                       icon="ant-design:medicine-box-filled"
                       height={30}
                       width={30}
+                      color="blue"
                     />
-                    <p className="ml-2 md:text-base text-sm">
+                    <p className="ml-2 md:text-base text-sm text-cornflowerblue">
                       Disinfections and Sterilizations
                     </p>
                   </div>
                   <div className="flex items-center my-2 md:my-0">
-                    <Icon icon="game-icons:smoke-bomb" height={30} width={30} />
-                    <p className="ml-2 md:text-base text-sm">Smoke Detectors</p>
+                    <Icon icon="game-icons:smoke-bomb" height={30} width={30}  color="blue"/>
+                    <p className="ml-2 md:text-base text-sm text-cornflowerblue">Smoke Detectors</p>
                   </div>
                 </div>
               </div>
@@ -99,6 +101,13 @@ const HotelDetails = () => {
           hotelName={state?.hotel?.name}
           hotelLocation={state?.hotel?.location?.city}
         />
+
+        <h2 className="font-bold text-3xl text-Blueviolet">Policies</h2>
+        {state?.hotel?.policies.map((policy,index) =>(
+          <ul key={index}>
+             <li className="text-xs md:text-base pt-2 text-cornflowerblue">{policy}.</li>
+          </ul>
+        ))}
       </Container>
     </div>
   );

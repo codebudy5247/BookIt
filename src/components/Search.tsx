@@ -58,7 +58,7 @@ const Search = () => {
               <div className="w-full relative">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="absolute top-0 bottom-0 w-6 h-6 my-auto text-gray-400 left-3"
+                  className="absolute top-0 bottom-0 w-6 h-6 my-auto text-Blueviolet left-3"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -95,7 +95,7 @@ const Search = () => {
             </div>
             {/* Select Date */}
             <div className="flex items-center gap-4">
-                <Icon icon="mdi:calendar-outline" width={30} height={30} />
+                <Icon icon="mdi:calendar-outline" width={30} height={30} color="blue" />
                 <span
                   onClick={() => setOpenDate(!openDate)}
                   className="text-Blueviolet cursor-pointer"

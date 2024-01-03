@@ -48,13 +48,13 @@ const ListingCard = (props: any) => {
             />
           </div> */}
         </div>
-        <div className="font-bold text-lg">
+        <div className="font-bold text-lg text-Blueviolet">
           {props?.data?.name},{" "}
           {capitalizeFirstLetter(props?.data?.location?.city)}
         </div>
         <div className="flex flex-row items-center gap-1">
-          <div className="font-semibold">₹ {props?.data?.price}</div>
-          <div className="font-light">night</div>
+          <div className="font-bold text-Blueviolet">₹ {props?.data?.price}</div>
+          <div className="font-light text-cornflowerblue">night</div>
         </div>
       </div>
     </div>

@@ -21,7 +21,7 @@ const renderIcons = (num: any) => {
   for (let i = 0; i < num; i++) {
     icons.push(
       <span key={i}>
-        <Icon icon="ic:baseline-person" height={30} width={30} />
+        <Icon icon="ic:baseline-person" height={30} width={30} color="blue" />
       </span>
     );
   }
@@ -200,7 +200,7 @@ const RoomAvailability = (props: any) => {
   if (isLoading) return <Loader />;
   return (
     <>
-      <h2 className="font-bold text-3xl mb-4">Availability</h2>
+      <h2 className="font-bold text-3xl mb-4 text-Blueviolet">Availability</h2>
 
       {/* Search && filter */}
       <div className="flex items-center justify-between">
@@ -271,7 +271,7 @@ const RoomAvailability = (props: any) => {
           </div>
 
           <div className="flex items-center gap-4">
-            <Icon icon="mdi:calendar-outline" width={30} height={30} />
+            <Icon icon="mdi:calendar-outline" width={30} height={30} color="blue"/>
             <span
               onClick={() => setOpenDate(!openDate)}
               className="text-Blueviolet font-bold cursor-pointer"
@@ -322,7 +322,7 @@ const RoomAvailability = (props: any) => {
                 filteredRooms.map((room: any, index: any) => (
                   <>
                     <tr key={index}>
-                      <td className="px-6 py-4 whitespace-nowrap border border-lightgray">
+                      <td className="px-6 py-4 whitespace-nowrap border border-lightgray text-Blueviolet">
                         {capitalizeFirstLetter(room?.roomType)}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap border border-lightgray">
@@ -330,7 +330,7 @@ const RoomAvailability = (props: any) => {
                           {renderIcons(room?.maxPeople)}
                         </div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap border border-lightgray">
+                      <td className="px-6 py-4 whitespace-nowrap border border-lightgray text-Blueviolet">
                         ₹ {room?.price}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap border border-lightgray">
@@ -365,7 +365,7 @@ const RoomAvailability = (props: any) => {
           <div className="flex justify-end mt-5">
             <button
               onClick={handleProceed}
-              className="py-3 px-3 border border-Blueviolet text-md font-medium bg-semiblueviolet hover:text-white hover:bg-Blueviolet"
+              className="py-3 px-3 border border-Blueviolet text-md text-Blueviolet font-medium bg-semiblueviolet hover:text-white hover:bg-Blueviolet"
             >
               Proceed
             </button>
