@@ -8,6 +8,10 @@ export interface Ibooking {
   stayLength: number;
   noOfGuest: number;
   totalPrice: number;
+  payment:{
+    paymentIntentId:string;
+    clientSecret:string;
+  }
 }
 
 export interface BookingResponse {
@@ -25,7 +29,8 @@ export interface BookingResponse {
 };
 
 export interface PaymentIntentInput {
-  amount:number
+  id:string;
+  totalAmount:number;
 }
 
 export interface PaymentIntentResponse {

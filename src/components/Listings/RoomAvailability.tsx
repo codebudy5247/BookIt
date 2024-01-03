@@ -10,8 +10,11 @@ import "react-date-range/dist/theme/default.css";
 import { format } from "date-fns";
 import { HotelRoomResponse } from "../../types/hotel";
 import { useAppSelector, useAppDispatch } from "../../redux/hook";
-import { Ibooking } from "../../types/booking";
+import { Ibooking, PaymentIntentInput } from "../../types/booking";
 import { bookingDetails } from "../../redux/features/bookingSlice";
+import { useCreatePaymentIntentMutation } from "../../redux/api/hotelApi";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 const renderIcons = (num: any) => {
   const icons = [];
@@ -55,7 +58,6 @@ const RoomAvailability = (props: any) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const searchDetails = useAppSelector((state) => state.searchState.searchData);
-
   const {
     data: hotelRooms,
     isError,
@@ -74,8 +76,6 @@ const RoomAvailability = (props: any) => {
   const [filteredRooms, setFilteredRooms] = useState<HotelRoomResponse[]>();
   const [selectedRoomsIDs, setSelectedRoomsIDs] = useState<string[]>([]);
   const [selectedRooms, setSelectedRooms] = useState<any>([]);
-
-  console.log({ selectedRooms });
 
   const filterRooms = (
     roomType: string | undefined,
@@ -127,27 +127,68 @@ const RoomAvailability = (props: any) => {
     const roomPrice = room.price;
     return acc + roomPrice;
   }, 0);
- 
+
+  console.log(totalPrice, "totalPrice");
+
   let allDates = getDatesInRange(
     searchDetails?.checkInDate,
     searchDetails.checkOutDate
   );
 
-  let bookingData: Ibooking = {
-    hotel: {
-      name: props?.hotelName,
-      location: props?.hotelLocation,
-    },
-    checkIn: searchDetails?.checkInDate,
-    checkOut: searchDetails.checkOutDate,
-    stayLength: allDates?.length,
-    noOfGuest: noOfGuest,
-    totalPrice: totalPrice,
-  };
+  // API Create Payment Intent Mutation
+  // const [
+  //   createPaymentIntent,
+  //   { error: paymentIntentErr, isError: paymentIntentIsErr, isSuccess },
+  // ] = useCreatePaymentIntentMutation();
 
-  const handleProceed = () => {
-    dispatch(bookingDetails(bookingData));
-    navigate(`/hotel/${props?.hotelID}/booking`);
+  const handleProceed = async () => {
+    // if (typeof totalPrice !== "number" || isNaN(totalPrice) || totalPrice < 0) {
+    //   console.error("Invalid totalPrice:", totalPrice);
+    //   return;
+    // }
+    // const payload: PaymentIntentInput = {
+    //   id: props?.hotelID,
+    //   totalAmount: totalPrice,
+    // };
+    // let createPaymentIntentResponse = await createPaymentIntent(payload);
+    // console.log({ createPaymentIntentResponse });
+    const response = await fetch(
+      `http://localhost:1337/api/booking/${props?.hotelID}/payment`,
+      {
+        credentials: "include",
+        method: "POST",
+        body: JSON.stringify({ totalAmount: totalPrice }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (!response.ok) {
+      let data = await response.json();
+      toast.error(data.message);
+    }
+    if (response.ok) {
+      const createPaymentIntentResponse = await response.json();
+      console.log(createPaymentIntentResponse?.data);
+
+      let bookingData: Ibooking = {
+        hotel: {
+          name: props?.hotelName,
+          location: props?.hotelLocation,
+        },
+        checkIn: searchDetails?.checkInDate,
+        checkOut: searchDetails.checkOutDate,
+        stayLength: allDates?.length,
+        noOfGuest: noOfGuest,
+        totalPrice: totalPrice,
+        payment: {
+          paymentIntentId: createPaymentIntentResponse.data.paymentIntentId,
+          clientSecret: createPaymentIntentResponse.data.clientSecret,
+        },
+      };
+      dispatch(bookingDetails(bookingData));
+      navigate(`/hotel/${props?.hotelID}/booking`);
+    }
   };
 
   if (isError)

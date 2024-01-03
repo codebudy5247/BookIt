@@ -1,4 +1,4 @@
-import { createApi } from "@reduxjs/toolkit/query/react";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { HotelResponse, HotelRoomResponse } from "../../types/hotel";
 import {
   PaymentIntentResponse,
@@ -7,9 +7,13 @@ import {
 } from "../../types/booking";
 import customFetchBase from "./customFetchBase";
 
+const baseUrl = "http://localhost:1337/api/";
+
 export const hotelApi = createApi({
   reducerPath: "hotelApi",
-  baseQuery: customFetchBase,
+  baseQuery: fetchBaseQuery({
+    baseUrl: baseUrl,
+  }),
   tagTypes: ["Hotels"],
   endpoints: (builder) => ({
     // Hotels API
@@ -45,6 +49,7 @@ export const hotelApi = createApi({
       query() {
         return {
           url: `/booking`,
+          credentials: "include",
         };
       },
       transformResponse: (results: { data: { bookings: BookingResponse[] } }) =>
@@ -54,17 +59,16 @@ export const hotelApi = createApi({
     // Payment API
     createPaymentIntent: builder.mutation<
       PaymentIntentResponse,
-      { id: string; data: PaymentIntentInput }
+      PaymentIntentInput
     >({
-      query({ id, data }) {
-        return {
-          url: `booking/${id}/payment`,
-          method: "POST",
-          credentials: "include",
-          body: data,
-        };
-      },
+      query: ({ id, totalAmount }) => ({
+        url: `booking/${id}/payment`,
+        method: "POST",
+        credentials: "include",
+        body: totalAmount,
+      }),
     }),
+    
   }),
 });
 

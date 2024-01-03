@@ -11,6 +11,10 @@ const initialStateVal: Ibooking = {
   stayLength: 0,
   noOfGuest: 0,
   totalPrice: 0,
+  payment: {
+    paymentIntentId: "",
+    clientSecret: "",
+  },
 };
 
 export const bookingSlice = createSlice({
@@ -25,6 +29,7 @@ export const bookingSlice = createSlice({
         stayLength,
         noOfGuest,
         totalPrice,
+        payment: { paymentIntentId, clientSecret },
       } = action.payload;
 
       return {
@@ -38,6 +43,7 @@ export const bookingSlice = createSlice({
         stayLength,
         noOfGuest,
         totalPrice,
+        payment: { paymentIntentId, clientSecret },
       };
     },
   },

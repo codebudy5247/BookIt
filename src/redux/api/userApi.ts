@@ -1,12 +1,15 @@
-import { createApi } from '@reduxjs/toolkit/query/react';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { setUser } from '../features/userSlice';
 import customFetchBase from './customFetchBase';
 import { IUser } from '../../types/user';
 
+const baseUrl = "http://localhost:1337/api/";
 
 export const userApi = createApi({
     reducerPath: 'userApi',
-    baseQuery: customFetchBase,
+    baseQuery: fetchBaseQuery({
+      baseUrl: baseUrl,
+    }),
     tagTypes: ['User'],
     endpoints: (builder) => ({
       getMe: builder.query<IUser, null>({
