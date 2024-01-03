@@ -4,8 +4,8 @@ import {
   PaymentIntentResponse,
   PaymentIntentInput,
   BookingResponse,
+  CreateBookingInput,
 } from "../../types/booking";
-import customFetchBase from "./customFetchBase";
 
 const baseUrl = "http://localhost:1337/api/";
 
@@ -56,6 +56,17 @@ export const hotelApi = createApi({
         results.data.bookings,
     }),
 
+    // Booking API
+    createBooking: builder.mutation<BookingResponse, CreateBookingInput>({
+      query(data) {
+        return {
+          url: "/booking",
+          method: "POST",
+          body: data,
+        };
+      },
+    }),
+
     // Payment API
     createPaymentIntent: builder.mutation<
       PaymentIntentResponse,
@@ -68,7 +79,6 @@ export const hotelApi = createApi({
         body: totalAmount,
       }),
     }),
-    
   }),
 });
 
@@ -78,4 +88,5 @@ export const {
   useGetHotelRoomsQuery,
   useGetBookingsQuery,
   useCreatePaymentIntentMutation,
+  useCreateBookingMutation,
 } = hotelApi;

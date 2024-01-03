@@ -1,17 +1,30 @@
 export interface Ibooking {
-  hotel:{
-    name:string;
-    location:string
-  }
+  hotel: {
+    name: string;
+    location: string;
+  };
   checkIn: Date;
   checkOut: Date;
   stayLength: number;
   noOfGuest: number;
   totalPrice: number;
-  payment:{
-    paymentIntentId:string;
-    clientSecret:string;
-  }
+  payment: {
+    paymentIntentId: string;
+    clientSecret: string;
+  };
+}
+
+export interface CreateBookingInput {
+  checkIn: string;
+  checkOut: string;
+  totalAmount: number;
+  hotel: string;
+  selectedRoomType: string;
+  payment: {
+    paymentIntentId: string;
+    clientSecret: string;
+    paymentStatus: boolean;
+  };
 }
 
 export interface BookingResponse {
@@ -22,20 +35,25 @@ export interface BookingResponse {
   hotel: string;
   user: string;
   selectedRoomType: string;
-  paymentStatus: boolean;
+  payment:{
+    paymentIntentId: string;
+    clientSecret:string;
+    paymentStatus:boolean;
+    _id:string;
+  }
   createdAt: Date;
   updatedAt: Date;
   __v: number;
-};
+}
 
 export interface PaymentIntentInput {
-  id:string;
-  totalAmount:number;
+  id: string;
+  totalAmount: number;
 }
 
 export interface PaymentIntentResponse {
-  hotelId:string;
-  paymentIntentId:string;
-  clientSecret:string;
-  totalAmount:string
-} 
+  hotelId: string;
+  paymentIntentId: string;
+  clientSecret: string;
+  totalAmount: string;
+}
