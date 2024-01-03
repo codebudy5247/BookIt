@@ -1,54 +1,72 @@
-import Container from "../components/Container"
+import Container from "../components/Container";
 import { useAppSelector } from "../redux/hook";
-
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import CheckoutForm from "../components/CheckoutForm";
 const Booking = () => {
   const bookingDetails = useAppSelector((state) => state.bookingState);
-  console.log({bookingDetails});
-  
+  const userDetails = useAppSelector((state) => state.userState.user);
+  console.log({ bookingDetails, userDetails });
+
+  const stripePromise = loadStripe(
+    "pk_test_51IAXt8BGsIvgSdruzeHYkk1VetjBggGpVk9DqFXYD0QeD47akLZ6KIsfUyOrzknmjSdxIof9rxHXOWO4nf7NQ4It005Qf3NRhx"
+  );
 
   return (
     <>
-    <Container>
-    <div className="grid gap-4 rounded-lg border border-slate-300 p-5 h-fit">
-      <h2 className="text-xl font-bold">Your Booking Details</h2>
-      <div className="border-b py-2">
-        Location:
-        <div className="font-bold">
-            {`${bookingDetails?.hotel?.name}, ${bookingDetails?.hotel?.location}`}
-           
-        </div>
-      </div>
-      <div className="flex justify-between">
-        <div>
-          Check-in
-          <div className="font-bold"> 
-          {bookingDetails?.checkIn?.toDateString()}
-          </div>
-        </div>
-        <div>
-          Check-out
-          <div className="font-bold">
-           {bookingDetails?.checkOut?.toDateString()}
-          </div>
-        </div>
-      </div>
-      <div className="border-t border-b py-2">
-        Total length of stay:
-        <div className="font-bold">
-            {bookingDetails?.stayLength} nights
-        </div>
-      </div>
+      <Container>
+        <div className="grid md:grid-cols-[3fr_3fr] gap-4">
+          {/* Booking Summary */}
+          <div className="grid gap-4 rounded-lg shadow-2xl p-5 h-fit">
+            <h2 className="text-xl font-bold">Your Booking Details</h2>
+            <div className="border-b py-2">
+              Location:
+              <div className="font-bold">
+                {`${bookingDetails?.hotel?.name}, ${bookingDetails?.hotel?.location}`}
+              </div>
+            </div>
+            <div className="flex justify-between">
+              <div>
+                Check-in
+                <div className="font-bold">
+                  {bookingDetails?.checkIn?.toDateString()}
+                </div>
+              </div>
+              <div>
+                Check-out
+                <div className="font-bold">
+                  {bookingDetails?.checkOut?.toDateString()}
+                </div>
+              </div>
+            </div>
+            <div className="border-t border-b py-2">
+              Total length of stay:
+              <div className="font-bold">
+                {bookingDetails?.stayLength} nights
+              </div>
+            </div>
 
-      <div>
-        Price{" "}
-        <div className="font-bold">
-          {bookingDetails?.totalPrice}
+            <div>
+              Price{" "}
+              <div className="font-bold">{bookingDetails?.totalPrice}</div>
+            </div>
+          </div>
+
+          <Elements
+            stripe={stripePromise}
+            options={{
+              clientSecret: bookingDetails.payment.clientSecret,
+            }}
+          >
+            <CheckoutForm
+              currentUser={userDetails!}
+              paymentIntent={bookingDetails}
+            />
+          </Elements>
         </div>
-      </div>
-    </div>
-    </Container>
+      </Container>
     </>
-  )
-}
+  );
+};
 
-export default Booking
+export default Booking;
