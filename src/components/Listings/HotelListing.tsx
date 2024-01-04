@@ -1,5 +1,5 @@
 import { HotelResponse } from "../../types/hotel";
-import Loader from "../Loader";
+import Loader from "../UI/Loader";
 import ListingCard from "./ListingCard";
 import { useAppSelector } from "../../redux/hook";
 

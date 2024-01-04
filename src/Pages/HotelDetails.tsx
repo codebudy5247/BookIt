@@ -1,8 +1,8 @@
-import Container from "../components/Container";
+import Container from "../components/UI/Container";
 import { useLocation } from "react-router-dom";
 import { HotelResponse } from "../types/hotel";
-import Gallery from "../components/Listings/Gallery";
-import RoomAvailability from "../components/Listings/RoomAvailability";
+import Gallery from "../components/ListingDetails/Gallery";
+import RoomAvailability from "../components/ListingDetails/RoomAvailability";
 import { Icon } from "@iconify/react";
 import { useAppSelector } from "../redux/hook";
 

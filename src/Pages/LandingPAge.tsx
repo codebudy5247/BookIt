@@ -1,4 +1,4 @@
-import Container from "../components/Container";
+import Container from "../components/UI/Container";
 import HeroSection from "../components/Landing/HeroSection";
 import FeaturedRoom from "../components/Landing/FeaturedRoom";
 import NewsLetter from "../components/Landing/NewsLetter";

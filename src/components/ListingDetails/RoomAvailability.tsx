@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useGetHotelRoomsQuery } from "../../redux/api/hotelApi";
-import Loader from "../Loader";
+import Loader from "../UI/Loader";
 import { Icon } from "@iconify/react";
 import Select from "react-select";
 import { DateRange } from "react-date-range";

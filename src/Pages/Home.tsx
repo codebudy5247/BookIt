@@ -1,6 +1,6 @@
 import { useGetHotelsQuery } from "../redux/api/hotelApi";
 import HotelListing from "../components/Listings/HotelListing";
-import Container from "../components/Container";
+import Container from "../components/UI/Container";
 import Search from "../components/Search";
 import NewsLetter from "../components/Landing/NewsLetter";
 const Home = () => {

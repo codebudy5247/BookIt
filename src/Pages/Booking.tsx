@@ -1,4 +1,4 @@
-import Container from "../components/Container";
+import Container from "../components/UI/Container";
 import { useAppSelector } from "../redux/hook";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";

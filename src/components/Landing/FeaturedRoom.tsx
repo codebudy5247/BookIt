@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useGetHotelsQuery } from "../../redux/api/hotelApi";
-import Loader from "../Loader";
+import Loader from "../UI/Loader";
 const FeaturedRoom = () => {
   const navigate = useNavigate();
   const { data, isLoading, isError } = useGetHotelsQuery();

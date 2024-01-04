@@ -11,7 +11,7 @@ import {
   Kolk,
   Ncr,
   Pune,
-} from "../assets/images";
+} from "../../assets/images";
 import { Icon } from "@iconify/react/dist/iconify.js";
 
 const data = [

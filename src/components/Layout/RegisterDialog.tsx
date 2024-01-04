@@ -3,7 +3,7 @@ import { Fragment, useState } from "react";
 import { Icon } from "@iconify/react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import Heading from "./Heading";
-import Input from "./Inputs/Input";
+import Input from "../UI/Input";
 
 const Register = () => {
   let [isOpen, setIsOpen] = useState(false);

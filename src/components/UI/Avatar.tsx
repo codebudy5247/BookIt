@@ -1,4 +1,4 @@
-import { AvatarImg } from "../assets/images";
+import { AvatarImg } from "../../assets/images";
 interface AvatarProps {
     src?: string | null | undefined;
   }

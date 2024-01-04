@@ -1,10 +1,10 @@
-import Container from "../components/Container";
+import Container from "../components/UI/Container";
 import {
   useGetUserBookingsQuery,
   useGetHotelQuery,
 } from "../redux/api/hotelApi";
 import { PuffLoader } from "react-spinners";
-import Loader from "../components/Loader";
+import Loader from "../components/UI/Loader";
 import { format, parseISO } from "date-fns";
 
 const GetHotel = (props: any) => {

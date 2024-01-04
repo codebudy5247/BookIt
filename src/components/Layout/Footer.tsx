@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
-import { Twitter, Facebook, Insta } from "../assets/images";
-import Logo from "./Logo";
+import { Twitter, Facebook, Insta } from "../../assets/images";
+import Logo from "../Logo";
 interface ProductType {
   id: number;
   section: string;

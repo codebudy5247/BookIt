@@ -1,7 +1,7 @@
 import { useCookies } from "react-cookie";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { userApi } from "../redux/api/userApi";
-import Loader from "../components/Loader";
+import Loader from "../components/UI/Loader";
 
 const RequireUser = ({ allowedRoles }: { allowedRoles: string[] }) => {
   const [cookies] = useCookies(["logged_in"]);

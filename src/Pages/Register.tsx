@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { Icon } from "@iconify/react";
-import Container from "../components/Container";
+import Container from "../components/UI/Container";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import Heading from "../components/Heading";
-import Input from "../components/Inputs/Input";
+import Heading from "../components/Layout/Heading";
+import Input from "../components/UI/Input";
 import { useRegisterUserMutation } from "../redux/api/authApi";
 import { RegisterUser } from "../types/user";
 import { toast } from "react-toastify";

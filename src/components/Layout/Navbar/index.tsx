@@ -2,13 +2,13 @@ import { Disclosure } from "@headlessui/react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Icon } from "@iconify/react";
-import Logo from "../Logo";
-import Drawer from "../Drawer";
+import Logo from "../../Logo";
+import Drawer from "../../UI/Drawer";
 import Drawerdata from "./DrawerData";
-import Avatar from "../Avatar";
+import Avatar from "../../UI/Avatar";
 import { useCookies } from "react-cookie";
-import { useAppSelector } from "../../redux/hook";
-import { useLogoutUserMutation } from "../../redux/api/authApi";
+import { useAppSelector } from "../../../redux/hook";
+import { useLogoutUserMutation } from "../../../redux/api/authApi";
 import { toast } from "react-toastify";
 
 function classNames(...classes: string[]) {

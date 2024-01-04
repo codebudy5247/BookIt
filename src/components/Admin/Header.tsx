@@ -1,4 +1,4 @@
-import Avatar from "../Avatar";
+import Avatar from "../UI/Avatar";
 
 const Header = () => {
   return (
