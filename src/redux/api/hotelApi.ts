@@ -65,7 +65,16 @@ export const hotelApi = createApi({
         };
       },
     }),
-
+    getUserBookings: builder.query<BookingResponse[], void>({
+      query() {
+        return {
+          url: `/users/bookings`,
+          credentials: "include",
+        };
+      },
+      transformResponse: (results: { data: { userBookings: BookingResponse[] } }) =>
+        results.data.userBookings,
+    }),
     // Payment API
     createPaymentIntent: builder.mutation<
       PaymentIntentResponse,
@@ -88,4 +97,5 @@ export const {
   useGetBookingsQuery,
   useCreatePaymentIntentMutation,
   useCreateBookingMutation,
+  useGetUserBookingsQuery
 } = hotelApi;
