@@ -189,7 +189,7 @@ const Navbar = () => {
                 <div className="flex gap-3 items-center">
                   <div
                     className="hidden lg:block cursor-pointer"
-                    onClick={() => navigate("/profile")}
+                    // onClick={() => navigate("/profile")}
                   >
                     <Avatar src={user?.avatar} />
                   </div>
