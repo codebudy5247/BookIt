@@ -2,12 +2,14 @@ import Layout from "../../components/Admin/Layout";
 import { useGetHotelsQuery } from "../../redux/api/hotelApi";
 import Loader from "../../components/UI/Loader";
 import { useState } from "react";
-
-const PAGE_SIZE = 5; // Number of items per page
+import usePagination from "../../Hooks/usePAgination";
 
 const AdminHotels = () => {
   const { data: Hotels, isLoading, isError } = useGetHotelsQuery();
-  const [currentPage, setCurrentPage] = useState<any>(1);
+  const ITEMS_PER_PAGE = 5;
+
+  const { currentData, totalPages, currentPage, handlePageChange } =
+    usePagination(Hotels, ITEMS_PER_PAGE);
 
   if (isError)
     return (
@@ -16,17 +18,6 @@ const AdminHotels = () => {
       </h1>
     );
   if (isLoading) return <Loader />;
-
-  // Pagination logic
-  const lastIndex = currentPage * PAGE_SIZE;
-  const firstIndex = lastIndex - PAGE_SIZE;
-  const currentHotels = Hotels?.slice(firstIndex, lastIndex);
-
-  const totalPages = Math.ceil(Hotels?.length! / PAGE_SIZE);
-
-  const handlePageChange = (pageNumber: any) => {
-    setCurrentPage(pageNumber);
-  };
   return (
     <Layout>
       <div className="w-full" style={{ height: "90vh" }}>
@@ -49,8 +40,8 @@ const AdminHotels = () => {
               </tr>
             </thead>
             <tbody>
-              {currentHotels &&
-                currentHotels.map((hotel: any, index: any) => (
+              {currentData &&
+                currentData.map((hotel: any, index: any) => (
                   <>
                     <tr key={index}>
                       <td className="px-1 py-1 whitespace-nowrap border border-lightgray text-Blueviolet">
@@ -65,7 +56,7 @@ const AdminHotels = () => {
             </tbody>
           </table>
         )}
-
+        {/* PAgination */}
         <div className="flex justify-center mt-4">
           {Array.from({ length: totalPages }, (_, index) => index + 1).map(
             (page) => (
