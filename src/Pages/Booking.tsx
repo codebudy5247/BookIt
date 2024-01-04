@@ -18,37 +18,37 @@ const Booking = () => {
         <div className="grid md:grid-cols-[3fr_3fr] gap-4">
           {/* Booking Summary */}
           <div className="grid gap-4 rounded-lg shadow-2xl p-5 h-fit">
-            <h2 className="text-xl font-bold">Your Booking Details</h2>
+            <h2 className="text-xl font-bold text-Blueviolet">Your Booking Details</h2>
             <div className="border-b py-2">
               Location:
-              <div className="font-bold">
+              <div className="font-bold text-darkgray">
                 {`${bookingDetails?.hotel?.name}, ${bookingDetails?.hotel?.location}`}
               </div>
             </div>
             <div className="flex justify-between">
               <div>
                 Check-in
-                <div className="font-bold">
+                <div className="font-bold text-darkgray">
                   {bookingDetails?.checkIn?.toDateString()}
                 </div>
               </div>
               <div>
                 Check-out
-                <div className="font-bold">
+                <div className="font-bold text-darkgray">
                   {bookingDetails?.checkOut?.toDateString()}
                 </div>
               </div>
             </div>
             <div className="border-t border-b py-2">
               Total length of stay:
-              <div className="font-bold">
+              <div className="font-bold text-darkgray">
                 {bookingDetails?.stayLength} nights
               </div>
             </div>
 
             <div>
               Price{" "}
-              <div className="font-bold">{bookingDetails?.totalPrice}</div>
+              <div className="font-bold text-darkgray">₹{bookingDetails?.totalPrice}</div>
             </div>
           </div>
 

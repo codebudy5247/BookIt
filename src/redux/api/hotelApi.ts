@@ -55,13 +55,12 @@ export const hotelApi = createApi({
       transformResponse: (results: { data: { bookings: BookingResponse[] } }) =>
         results.data.bookings,
     }),
-
-    // Booking API
     createBooking: builder.mutation<BookingResponse, CreateBookingInput>({
       query(data) {
         return {
           url: "/booking",
           method: "POST",
+          credentials: "include",
           body: data,
         };
       },

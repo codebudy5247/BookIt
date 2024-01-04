@@ -5,6 +5,8 @@ import { Ibooking } from "../types/booking";
 import { toast } from "react-toastify";
 import { PuffLoader } from "react-spinners";
 import { useState } from "react";
+import { CreateBookingInput } from "../types/booking";
+import { useCreateBookingMutation } from "../redux/api/hotelApi";
 
 type Props = {
   currentUser: IUser;
@@ -16,6 +18,10 @@ const CheckoutForm = ({ currentUser, paymentIntent }: Props) => {
   const elements = useElements();
 
   const [isLoading, setIsLoading] = useState<boolean>();
+
+  // API Create Booking Mutation
+  const [createBooking, { isError, error, isSuccess }] =
+    useCreateBookingMutation();
 
   const onSubmit = async () => {
     if (!stripe || !elements) {
@@ -34,13 +40,26 @@ const CheckoutForm = ({ currentUser, paymentIntent }: Props) => {
       toast.error(result.error?.message);
     }
     if (result?.paymentIntent?.status === "succeeded") {
+      let payload: CreateBookingInput = {
+        checkIn: paymentIntent.checkIn,
+        checkOut: paymentIntent.checkOut,
+        totalAmount: paymentIntent.totalPrice,
+        hotel: paymentIntent.hotel.id,
+        selectedRoomType: "suite",
+        payment: {
+          paymentIntentId: paymentIntent.payment.paymentIntentId,
+          clientSecret: paymentIntent.payment.clientSecret,
+          paymentStatus: true,
+        },
+      };
+      createBooking(payload)
       toast.success("Payment Successfull");
     }
     setIsLoading(false);
   };
   return (
     <div className="grid grid-cols-1 gap-5 rounded-lg shadow-2xl p-5">
-      <span className="text-3xl font-bold">Confirm Your Details</span>
+      <span className="text-3xl font-bold text-Blueviolet">Confirm Your Details</span>
       <div className="grid md:grid-cols-[3fr_3fr] gap-4">
         <input
           id="search"
@@ -84,16 +103,16 @@ const CheckoutForm = ({ currentUser, paymentIntent }: Props) => {
       </div>
 
       <div className="space-y-2">
-        <h2 className="text-xl font-semibold">Your Price Summary</h2>
+        <h2 className="text-xl font-semibold text-Blueviolet">Your Price Summary</h2>
 
         <div className="bg-semiblueviolet p-4 rounded-md">
-          <div className="font-semibold text-lg">Total Cost: £{2899}</div>
-          <div className="text-xs">Includes taxes and charges</div>
+          <div className="font-semibold text-lg text-kellygreen">Total Cost: ₹{paymentIntent?.totalPrice}</div>
+          <div className="text-xs text-darkgray">Includes taxes and charges.</div>
         </div>
       </div>
 
       <div className="space-y-2">
-        <h3 className="text-xl font-semibold"> Payment Details</h3>
+        <h3 className="text-xl font-semibold text-Blueviolet"> Payment Details</h3>
         <CardElement
           id="payment-element"
           className="border rounded-md p-2 text-sm"

@@ -24,8 +24,8 @@ export interface Room {
 }
 
 export interface CreateBookingInput {
-  checkIn: string;
-  checkOut: string;
+  checkIn: Date;
+  checkOut: Date;
   totalAmount: number;
   hotel: string;
   selectedRoomType: string;
