@@ -10,6 +10,7 @@ import RegisterPage from "./Pages/Register";
 import LoginPage from "./Pages/Login";
 import UserProfile from "./Pages/USerProfile";
 import Booking from "./Pages/Booking";
+import UserBookings from "./Pages/UserBookings";
 function App() {
   return (
     <>
@@ -28,6 +29,7 @@ function App() {
           <Route element={<RequireUser allowedRoles={["user", "admin"]} />}>
             <Route path="profile" element={<UserProfile />} />
             <Route path="hotel/:id/booking" element={<Booking />} />
+            <Route path="bookings" element={<UserBookings />} />
           </Route>
 
           {/* Admin Routes */}

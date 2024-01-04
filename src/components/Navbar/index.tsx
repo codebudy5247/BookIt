@@ -115,23 +115,26 @@ const Navbar = () => {
                       Home
                     </span>
                   </CustomLink>
-                  {/* <CustomLink
-                    key="About"
-                    href="/"
-                    onClick={() => handleLinkClick("/")}
+
+                  {logged_in && (
+                    <CustomLink
+                    key="Bookings"
+                    href="/bookings"
+                    onClick={() => handleLinkClick("/bookings")}
                   >
                     <span
                       className={classNames(
-                        "/" === currentLink
+                        "/bookings" === currentLink
                           ? "underline-links"
                           : "text-slategray",
                         "px-3 py-4 text-lg font-normal opacity-75 hover:opacity-100"
                       )}
-                      aria-current={"/" ? "page" : undefined}
+                      aria-current={"/bookings" ? "page" : undefined}
                     >
-                      About
+                      Bookings
                     </span>
-                  </CustomLink> */}
+                  </CustomLink>
+                  )}
                   {user?.role === "admin" && (
                     <CustomLink
                       key="Admin"
