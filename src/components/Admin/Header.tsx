@@ -10,7 +10,7 @@ const Header = () => {
         <div className="bg-grey500 flex items-center rounded-md overflow-hidden">
           <img
             className="h-8"
-            src="https://mui.com/static/images/avatar/1.jpg"
+            src="https://api-prod-minimal-v510.vercel.app/assets/images/avatar/avatar_9.jpg"
             alt=""
           />
           <span className="text-cornflowerblue px-3">Admin</span>
