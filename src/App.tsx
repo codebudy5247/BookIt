@@ -11,6 +11,9 @@ import LoginPage from "./Pages/Login";
 import UserProfile from "./Pages/USerProfile";
 import Booking from "./Pages/Booking";
 import UserBookings from "./Pages/UserBookings";
+
+import AdminBookings from "./Pages/Admin/AdminBookings";
+import AdminHotels from "./Pages/Admin/AdminHotels";
 function App() {
   return (
     <>
@@ -35,6 +38,8 @@ function App() {
           {/* Admin Routes */}
           <Route element={<RequireUser allowedRoles={["admin"]} />}>
             <Route path="admin" element={<AdminPage />} />
+            <Route path="admin/bookings" element={<AdminBookings />} />
+            <Route path="admin/hotels" element={<AdminHotels />} />
           </Route>
         </Route>
         <Route path="login" element={<LoginPage />} />

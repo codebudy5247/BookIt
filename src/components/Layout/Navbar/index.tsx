@@ -87,7 +87,7 @@ const Navbar = () => {
     }
   }, [logged_in]);
 
-  if (location.pathname === "/admin") return <></>;
+  if(location.pathname.includes("/admin")) return <></>;
 
   return (
     <Disclosure as="nav" className="navbar">
