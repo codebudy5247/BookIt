@@ -14,6 +14,7 @@ import UserBookings from "./Pages/UserBookings";
 
 import AdminBookings from "./Pages/Admin/AdminBookings";
 import AdminHotels from "./Pages/Admin/AdminHotels";
+import AddHotel from "./Pages/Admin/AddHotel";
 function App() {
   return (
     <>
@@ -40,6 +41,7 @@ function App() {
             <Route path="admin" element={<AdminPage />} />
             <Route path="admin/bookings" element={<AdminBookings />} />
             <Route path="admin/hotels" element={<AdminHotels />} />
+            <Route path="admin/add-hotel" element={<AddHotel />} />
           </Route>
         </Route>
         <Route path="login" element={<LoginPage />} />

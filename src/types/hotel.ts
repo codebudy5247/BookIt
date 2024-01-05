@@ -27,6 +27,7 @@ export type HotelMutateInput = {
   location: Location;
   price: string;
   yearOpened: string;
+  imageFiles?: FileList;
   images: string[];
   description: string;
   amenities: string[];
