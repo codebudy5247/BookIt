@@ -16,7 +16,7 @@ const AdminBookings = () => {
   if (isLoading) return <Loader />;
   return (
     <Layout>
-      <div className="w-full" style={{ height: "90vh" }}>
+      <div className="">
         <h1 className="font-extrabold text-center text-5xl text-Blueviolet underline">
           Bookings
         </h1>
