@@ -1,16 +1,54 @@
-import React from "react";
 import Layout from "../../components/Admin/Layout";
 import { FormProvider, useForm } from "react-hook-form";
 import { HotelMutateInput } from "../../types/hotel";
+import Select from "react-select";
+import makeAnimated from "react-select/animated";
+import { useState } from "react";
+
+const animatedComponents = makeAnimated();
+
+const options = [
+  { value: "wifi", label: "Wifi" },
+  { value: "kitchen", label: "Kitchen" },
+  { value: "ac", label: "AC" },
+  { value: "tv", label: "TV" },
+  { value: "geyser", label: "Geyser" },
+  { value: "powerBackup", label: "Power Backup" },
+  { value: "elevator", label: "Elevator" },
+  { value: "security", label: "Security" },
+  { value: "laundry", label: "Laundry" },
+  { value: "freeParking", label: "Free Parking" },
+  { value: "gym", label: "Gym" },
+  { value: "evCharger", label: "EV Charger" },
+];
 
 const AddHotel = () => {
+  const [selectedAmenities, setSelectedAmenities] = useState<any>([]);
   const formMethods = useForm<HotelMutateInput>();
   const {
     handleSubmit,
     reset,
     register,
     formState: { errors },
+    watch,
+    setValue,
   } = formMethods;
+
+  const existingImageUrls:any = watch("images");
+
+  console.log(existingImageUrls,"existingImageUrls");
+  
+
+  const handleDelete = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    imageUrl: string
+  ) => {
+    event.preventDefault();
+    setValue(
+      "images",
+      existingImageUrls.filter((url:any) => url !== imageUrl)
+    );
+  };
 
   const onSubmit = handleSubmit((formDataJson: HotelMutateInput) => {
     console.log(formDataJson, "formDataJson");
@@ -44,7 +82,7 @@ const AddHotel = () => {
                       disabled:cursor-not-allowed
                     `}
                 {...register("name", { required: "This field is required" })}
-              /> 
+              />
               {/* {errors.name && (
                 <span className="text-red">{errors.name.message}</span>
               )} */}
@@ -172,12 +210,43 @@ const AddHotel = () => {
                   required: "This field is required",
                 })}
               />
+              <Select
+                placeholder="Select Amenities"
+                isClearable
+                isMulti
+                options={options}
+                defaultValue={selectedAmenities}
+                onChange={setSelectedAmenities}
+                formatOptionLabel={(option: any) => (
+                  <div
+                    className="
+          flex flex-row items-center gap-3"
+                  >
+                    <div>{option.flag}</div>
+                    <div>{option.label}</div>
+                  </div>
+                )}
+                classNames={{
+                  control: () => "p-2 border-2",
+                  input: () => "text-lg",
+                  option: () => "text-lg",
+                }}
+                theme={(theme) => ({
+                  ...theme,
+                  borderRadius: 6,
+                  colors: {
+                    ...theme.colors,
+                    primary: "black",
+                    primary25: "rgba(101, 86, 255, 0.15)",
+                  },
+                })}
+              />
             </div>
             <textarea
               id="description"
               placeholder="Description"
               rows={4}
-              cols={5}
+              cols={3}
               className={`
                       peer
                       w-full
@@ -196,7 +265,57 @@ const AddHotel = () => {
                 required: "This field is required",
               })}
             />
-            <button className="py-3 px-3 text-md text-Blueviolet font-medium bg-semiblueviolet hover:text-white hover:bg-Blueviolet">
+
+            {/* Image section */}
+
+            {/* <div>
+              <h2 className="text-2xl font-bold mb-3">Images</h2>
+              <div className="border rounded p-4 flex flex-col gap-4">
+                {existingImageUrls && existingImageUrls.length > 0 && (
+                  <div className="grid grid-cols-6 gap-4">
+                    {existingImageUrls.map((url:any) => (
+                      <div className="relative group" key={url}>
+                        <img src={url} className="min-h-full object-cover" />
+                        <button
+                          onClick={(event) => handleDelete(event, url)}
+                          className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 text-white"
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                <input
+                  type="file"
+                  multiple
+                  accept="image/*"
+                  className="w-full text-gray-700 font-normal"
+                  {...register("images", {
+                    validate: (imageFiles) => {
+                      const totalLength =
+                        imageFiles.length + (existingImageUrls?.length || 0);
+
+                      if (totalLength === 0) {
+                        return "At least one image should be added";
+                      }
+
+                      if (totalLength > 6) {
+                        return "Total number of images cannot be more than 6";
+                      }
+
+                      return true;
+                    },
+                  })}
+                />
+              </div>
+              {errors.imageFiles && (
+                <span className="text-red text-sm font-bold">
+                  {errors.imageFiles.message}
+                </span>
+              )}
+            </div> */}
+            <button className="py-3 px-3 text-md text-Blueviolet font-medium bg-semiblueviolet hover:text-white hover:bg-Blueviolet mt-5">
               Submit
             </button>
           </form>
