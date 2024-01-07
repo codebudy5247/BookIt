@@ -3,6 +3,7 @@ import uploadImg from "../../assets/images/cloud-upload.png";
 import { ImageConfig } from "./FileConfig";
 import { Controller, useController, useFormContext } from "react-hook-form";
 import CustomBox from "./CustomBox";
+import { Icon } from "@iconify/react";
 
 interface IProps {
   limit: number;
@@ -50,6 +51,18 @@ const ImageUpload = ({ limit, multiple, name }: IProps) => {
     },
     [field, fileList, limit, multiple, singleFile]
   );
+
+  const fileRemove = (file: File) => {
+    const updatedList = [...fileList];
+    updatedList.splice(fileList.indexOf(file), 1);
+    setFileList(updatedList);
+  };
+
+  const fileSingleRemove = (file: File) => {
+    const updatedList = [...singleFile];
+    updatedList.splice(singleFile.indexOf(file), 1);
+    setSingleFile(updatedList);
+  };
 
   type CustomType = "jpg" | "png" | "svg";
 
@@ -133,24 +146,38 @@ const ImageUpload = ({ limit, multiple, name }: IProps) => {
                   key={index}
                   className="relative bg-[#f5f8ff] rounded-md py-2 px-2 mt-2"
                 >
-                  <div className="flex">
-                    <img
-                      src={
-                        ImageConfig[`${imageType}`] || ImageConfig["default"]
-                      }
-                      alt="upload"
-                      style={{
-                        height: "3.5rem",
-                        objectFit: "contain",
-                      }}
-                    />
-                    <div className="ml-1">
-                      <p className="font-bold">{item.name}</p>
-                      <p className="text-sm">{calcSize(item.size)}</p>
+                  <div className="flex justify-between items-center">
+                    <div className="flex">
+                      <img
+                        src={
+                          ImageConfig[`${imageType}`] || ImageConfig["default"]
+                        }
+                        alt="upload"
+                        style={{
+                          height: "3.5rem",
+                          objectFit: "contain",
+                        }}
+                      />
+                      <div className="ml-1">
+                        <p className="font-bold">{item.name}</p>
+                        <p className="text-sm">{calcSize(item.size)}</p>
+                      </div>
                     </div>
-                  </div>
 
-                  {/* Delete Btn */}
+                    <Icon
+                      onClick={() => {
+                        if (multiple) {
+                          fileRemove(item);
+                        } else {
+                          fileSingleRemove(item);
+                        }
+                      }}
+                      icon="ic:baseline-delete"
+                      width={30}
+                      height={30}
+                      className="cursor-pointer"
+                    />
+                  </div>
                 </div>
               );
             })}
