@@ -7,7 +7,7 @@ import {
   CreateBookingInput,
 } from "../../types/booking";
 
-const baseUrl = "http://localhost:1337/api/";
+const baseUrl = import.meta.env.VITE_API_KEY
 
 export const hotelApi = createApi({
   reducerPath: "hotelApi",

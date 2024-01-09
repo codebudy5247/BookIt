@@ -3,7 +3,7 @@ import { IGenericResponse, RegisterUser, LoginUser } from "../../types/user";
 import customFetchBase from './customFetchBase';
 import { userApi } from "./userApi";
 
-const baseUrl = "http://localhost:1337/api/";
+const baseUrl = import.meta.env.VITE_API_KEY
 
 export const authApi = createApi({
   reducerPath: "authApi",

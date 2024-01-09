@@ -7,7 +7,7 @@ import {
 import { Mutex } from "async-mutex";
 import { logout } from "../features/userSlice";
 
-const baseUrl = "http://localhost:1337/api/";
+const baseUrl = import.meta.env.VITE_API_KEY
 // Create a new mutex
 const mutex = new Mutex();
 
